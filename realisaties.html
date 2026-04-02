@@ -528,6 +528,102 @@
     }
 
     /* ============================================================
+       BEFORE / AFTER SLIDER
+       ============================================================ */
+    .before-after {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      border-radius: inherit;
+      cursor: ew-resize;
+      user-select: none;
+    }
+    .before-after-after,
+    .before-after-before {
+      position: absolute;
+      inset: 0;
+      overflow: hidden;
+    }
+    .before-after-before {
+      clip-path: inset(0 50% 0 0);
+    }
+    .before-after-after img,
+    .before-after-before img {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+    .before-after-handle {
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 2px;
+      pointer-events: none;
+    }
+    .before-after-line {
+      position: absolute;
+      inset: 0;
+      width: 2px;
+      background: rgba(255,255,255,.9);
+      box-shadow: 0 0 6px rgba(0,0,0,.5);
+    }
+    .before-after-btn {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: var(--white);
+      box-shadow: 0 2px 10px rgba(0,0,0,.28);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 2px;
+    }
+    .before-after-btn svg {
+      color: var(--neutral-700);
+    }
+    .before-after-labels {
+      position: absolute;
+      bottom: 14px;
+      inset-inline: 0;
+      display: flex;
+      justify-content: space-between;
+      padding-inline: 14px;
+      pointer-events: none;
+      z-index: 2;
+    }
+    .before-after-label {
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      color: var(--white);
+      background: rgba(26,46,20,.55);
+      padding: 4px 10px;
+      border-radius: 999px;
+    }
+    .before-after-range {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      opacity: 0;
+      cursor: ew-resize;
+      margin: 0;
+      z-index: 10;
+      -webkit-appearance: none;
+    }
+
+    /* ============================================================
        RESPONSIVE
        ============================================================ */
     @media (max-width: 900px) {
@@ -685,11 +781,26 @@
         <!-- Realisatie 3 -->
         <li class="feed-item reveal">
           <div class="feed-item-img">
-            <img
-              src="Projectfoto's/maaien_van_lang_gras_na.jpg"
-              alt="Gazon professioneel gemaaid, Harelbeke"
-              loading="lazy"
-            >
+            <div class="before-after" data-before-after>
+              <div class="before-after-after">
+                <img src="Projectfoto's/maaien_van_lang_gras_na.jpg" alt="Na: gazon gemaaid, Harelbeke" loading="lazy">
+              </div>
+              <div class="before-after-before">
+                <img src="Projectfoto's/maaien_van_lang_gras_voor.jpg" alt="Voor: verwilderd gazon, Harelbeke" loading="lazy">
+              </div>
+              <div class="before-after-handle">
+                <div class="before-after-line"></div>
+                <div class="before-after-btn">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+                </div>
+              </div>
+              <div class="before-after-labels">
+                <span class="before-after-label">Voor</span>
+                <span class="before-after-label">Na</span>
+              </div>
+              <input type="range" class="before-after-range" min="0" max="100" value="50" aria-label="Voor/na vergelijking">
+            </div>
           </div>
           <div class="feed-item-body">
             <div class="feed-item-meta">
@@ -708,11 +819,26 @@
         <!-- Realisatie 4 -->
         <li class="feed-item reveal">
           <div class="feed-item-img">
-            <img
-              src="Projectfoto's/reinigen_tuin1.jpg"
-              alt="Grondige tuinreiniging uitgevoerd, Harelbeke"
-              loading="lazy"
-            >
+            <div class="before-after" data-before-after>
+              <div class="before-after-after">
+                <img src="Projectfoto's/reinigen_tuin1.jpg" alt="Na: tuin gereinigd, Harelbeke" loading="lazy">
+              </div>
+              <div class="before-after-before">
+                <img src="Projectfoto's/reinigen_tuin_voor.jpg" alt="Voor: verwaarloosde tuin, Harelbeke" loading="lazy">
+              </div>
+              <div class="before-after-handle">
+                <div class="before-after-line"></div>
+                <div class="before-after-btn">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+                </div>
+              </div>
+              <div class="before-after-labels">
+                <span class="before-after-label">Voor</span>
+                <span class="before-after-label">Na</span>
+              </div>
+              <input type="range" class="before-after-range" min="0" max="100" value="50" aria-label="Voor/na vergelijking">
+            </div>
           </div>
           <div class="feed-item-body">
             <div class="feed-item-meta">
@@ -792,6 +918,21 @@
     }, { threshold: 0.10, rootMargin: '0px 0px -40px 0px' });
 
     document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+    // Before/after sliders
+    document.querySelectorAll('[data-before-after]').forEach(el => {
+      const before = el.querySelector('.before-after-before');
+      const handle = el.querySelector('.before-after-handle');
+      const range  = el.querySelector('.before-after-range');
+
+      function update(val) {
+        before.style.clipPath = `inset(0 ${100 - val}% 0 0)`;
+        handle.style.left = val + '%';
+      }
+
+      range.addEventListener('input', () => update(range.value));
+      update(50);
+    });
 
     // Mobile nav toggle
     document.getElementById('navToggle').addEventListener('click', () => {
