@@ -1,0 +1,920 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contact — Tuinen Janssens uit Harelbeke</title>
+  <meta name="description" content="Neem contact op met Tuinen Janssens. Offerte aanvragen voor tuinontwerp, tuinaanleg of tuinonderhoud in Harelbeke en omgeving.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <style>
+    /* ============================================================
+       TOKENS
+       ============================================================ */
+    :root {
+      --green-900: #1A2E14;
+      --green-800: #2D4A22;
+      --green-700: #3D6130;
+      --green-600: #4E7A3C;
+      --green-500: #5E9247;
+      --green-400: #7CAF62;
+      --green-300: #A4C98C;
+      --green-200: #C8DFB6;
+      --green-100: #E6F2DA;
+      --green-50:  #F3F9EE;
+
+      --orange-700: #9E4318;
+      --orange-600: #B84F1C;
+      --orange-500: #C8581F;
+      --orange-400: #D96B30;
+      --orange-300: #E88F5E;
+      --orange-100: #FAD9C3;
+      --orange-50:  #FDF0E8;
+
+      --neutral-900: #1C1C1A;
+      --neutral-800: #2E2D2A;
+      --neutral-700: #474540;
+      --neutral-600: #605E58;
+      --neutral-500: #7A7870;
+      --neutral-400: #9A9890;
+      --neutral-300: #BBBAB3;
+      --neutral-200: #D5D4CC;
+      --neutral-100: #EDECE8;
+      --neutral-50:  #F7F7F4;
+      --white: #FFFFFF;
+
+      --font-display: 'Playfair Display', Georgia, serif;
+      --font-body:    'DM Sans', system-ui, sans-serif;
+
+      --r-sm:  4px;
+      --r-md:  8px;
+      --r-lg:  16px;
+      --r-xl:  24px;
+      --r-2xl: 32px;
+
+      --shadow-sm: 0 1px 3px rgba(28,28,26,.08), 0 1px 2px rgba(28,28,26,.04);
+      --shadow-md: 0 4px 12px rgba(28,28,26,.10), 0 2px 4px rgba(28,28,26,.06);
+      --shadow-lg: 0 12px 32px rgba(28,28,26,.12), 0 4px 8px rgba(28,28,26,.06);
+
+      --ease: cubic-bezier(0.16, 1, 0.3, 1);
+      --dur:  300ms;
+    }
+
+    /* ============================================================
+       RESET & BASE
+       ============================================================ */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; font-size: 16px; }
+    body {
+      font-family: var(--font-body);
+      background: var(--neutral-50);
+      color: var(--neutral-800);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+    img { display: block; max-width: 100%; }
+    a { color: inherit; text-decoration: none; }
+    ul { list-style: none; }
+
+    /* ============================================================
+       UTILITIES
+       ============================================================ */
+    .container {
+      max-width: 1160px;
+      margin-inline: auto;
+      padding-inline: 32px;
+    }
+    .label {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+      color: var(--orange-500);
+    }
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-family: var(--font-body);
+      font-size: 14px;
+      font-weight: 600;
+      border-radius: 999px;
+      padding: 12px 28px;
+      cursor: pointer;
+      border: 2px solid transparent;
+      transition: background var(--dur) var(--ease),
+                  color var(--dur) var(--ease),
+                  border-color var(--dur) var(--ease),
+                  box-shadow var(--dur) var(--ease),
+                  transform 150ms var(--ease);
+      white-space: nowrap;
+    }
+    .btn:hover { transform: translateY(-1px); }
+    .btn:active { transform: translateY(0); }
+    .btn-primary {
+      background: var(--orange-500);
+      color: var(--white);
+      box-shadow: 0 4px 16px rgba(200,88,31,.30);
+    }
+    .btn-primary:hover {
+      background: var(--orange-400);
+      box-shadow: 0 6px 24px rgba(200,88,31,.40);
+    }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity 0.65s var(--ease), transform 0.65s var(--ease);
+    }
+    .reveal.visible { opacity: 1; transform: none; }
+    .reveal-delay-1 { transition-delay: 100ms; }
+    .reveal-delay-2 { transition-delay: 200ms; }
+    .reveal-delay-3 { transition-delay: 300ms; }
+    .reveal-delay-4 { transition-delay: 400ms; }
+
+    /* ============================================================
+       NAV
+       ============================================================ */
+    .nav {
+      position: fixed;
+      inset-block-start: 0;
+      inset-inline: 0;
+      z-index: 100;
+      transition: background var(--dur) var(--ease),
+                  box-shadow var(--dur) var(--ease),
+                  backdrop-filter var(--dur) var(--ease);
+    }
+    .nav.scrolled {
+      background: rgba(247,247,244,.95);
+      backdrop-filter: blur(8px);
+      box-shadow: 0 1px 0 rgba(28,28,26,.08);
+    }
+    .nav-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 72px;
+      gap: 32px;
+    }
+    .nav-logo {
+      display: block;
+    }
+    .nav-logo-wrap {
+      position: relative;
+      height: 96px;
+      width: 240px;
+      transition: height 400ms var(--ease), width 400ms var(--ease);
+    }
+    .nav.scrolled .nav-logo-wrap {
+      height: 80px;
+      width: 200px;
+    }
+    .nav-logo-hero,
+    .nav-logo-scrolled {
+      position: absolute;
+      top: 0;
+      left: 0;
+      height: 100%;
+      width: auto;
+      transition: opacity 400ms var(--ease),
+                  filter 400ms var(--ease);
+    }
+    .nav-logo-hero {
+      opacity: 1;
+      filter: drop-shadow(0 0 10px rgba(255,255,255,.45))
+              drop-shadow(0 2px 4px rgba(0,0,0,.25));
+    }
+    .nav-logo-scrolled { opacity: 0; }
+    .nav.scrolled .nav-logo-hero { opacity: 0; filter: none; }
+    .nav.scrolled .nav-logo-scrolled { opacity: 1; }
+    .nav-links { display: flex; align-items: center; gap: 8px; }
+    .nav-links a {
+      font-size: 14px;
+      font-weight: 500;
+      color: var(--white);
+      padding: 6px 14px;
+      border-radius: 999px;
+      transition: color var(--dur), background var(--dur);
+    }
+    .nav-links a.active { background: rgba(255,255,255,.18); }
+    .nav.scrolled .nav-links a { color: var(--neutral-700); }
+    .nav.scrolled .nav-links a.active { background: var(--green-50); color: var(--green-800); }
+    .nav-links a:hover { background: rgba(255,255,255,.15); }
+    .nav.scrolled .nav-links a:hover { background: var(--green-50); color: var(--green-800); }
+    .nav-cta { flex-shrink: 0; }
+    .nav-panel { display: flex; align-items: center; gap: 32px; }
+    .nav-toggle {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      cursor: pointer;
+      padding: 6px;
+      background: none;
+      border: none;
+    }
+    .nav-toggle span {
+      display: block;
+      width: 22px;
+      height: 2px;
+      background: var(--white);
+      border-radius: 2px;
+      transition: background var(--dur);
+    }
+    .nav.scrolled .nav-toggle span { background: var(--neutral-800); }
+
+    /* ============================================================
+       PAGE HEADER
+       ============================================================ */
+    .page-header {
+      position: relative;
+      height: 52vh;
+      min-height: 340px;
+      display: flex;
+      align-items: flex-end;
+      padding-bottom: 64px;
+      overflow: hidden;
+    }
+    .page-header-bg {
+      position: absolute;
+      inset: 0;
+      background-image: url("Projectfoto's/510226915_1309700247528115_6538786310940227683_n.jpg");
+      background-size: cover;
+      background-position: center 30%;
+    }
+    .page-header-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(
+        to bottom,
+        rgba(26,46,20,.45) 0%,
+        rgba(26,46,20,.82) 100%
+      );
+    }
+    .page-header-content {
+      position: relative;
+      z-index: 1;
+    }
+    .page-header-label {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+      color: var(--orange-300);
+      margin-bottom: 12px;
+    }
+    .page-header-title {
+      font-family: var(--font-display);
+      font-size: clamp(36px, 6vw, 64px);
+      font-weight: 700;
+      color: var(--white);
+      line-height: 1.1;
+    }
+    .page-header-title em {
+      font-style: italic;
+      color: var(--green-300);
+    }
+    .page-header-sub {
+      margin-top: 16px;
+      font-size: 16px;
+      color: rgba(255,255,255,.75);
+      max-width: 480px;
+      line-height: 1.75;
+    }
+
+    /* ============================================================
+       CONTACT BODY
+       ============================================================ */
+    .contact-body {
+      padding: 96px 0 112px;
+    }
+    .contact-grid {
+      display: grid;
+      grid-template-columns: 1fr 1.35fr;
+      gap: 80px;
+      align-items: start;
+    }
+
+    /* Left: info */
+    .contact-info-title {
+      font-family: var(--font-display);
+      font-size: clamp(20px, 2.5vw, 26px);
+      font-weight: 700;
+      color: var(--green-900);
+      line-height: 1.25;
+      margin-top: 8px;
+      margin-bottom: 8px;
+    }
+    .contact-info-sub {
+      font-size: 15px;
+      color: var(--neutral-600);
+      line-height: 1.75;
+      margin-bottom: 40px;
+    }
+    .info-items {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+      border: 1px solid var(--neutral-200);
+      border-radius: var(--r-xl);
+      overflow: hidden;
+      background: var(--white);
+    }
+    .info-item {
+      display: flex;
+      gap: 16px;
+      align-items: flex-start;
+      padding: 24px;
+      border-bottom: 1px solid var(--neutral-100);
+      transition: background var(--dur);
+    }
+    .info-item:last-child { border-bottom: none; }
+    .info-item:hover { background: var(--neutral-50); }
+    .info-item-icon {
+      width: 40px;
+      height: 40px;
+      background: var(--green-50);
+      border: 1px solid var(--green-200);
+      border-radius: var(--r-md);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      color: var(--green-700);
+    }
+    .info-item-label {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      color: var(--neutral-400);
+      margin-bottom: 4px;
+    }
+    .info-item-value {
+      font-size: 15px;
+      color: var(--neutral-800);
+      font-weight: 500;
+      line-height: 1.5;
+    }
+    .info-item-value a { transition: color var(--dur); }
+    .info-item-value a:hover { color: var(--green-700); }
+
+    /* Map */
+    .map-wrap {
+      margin-top: 24px;
+      border-radius: var(--r-xl);
+      overflow: hidden;
+      border: 1px solid var(--neutral-200);
+      background: var(--white);
+    }
+    .map-wrap iframe {
+      display: block;
+      width: 100%;
+      height: 220px;
+      border: none;
+    }
+    .map-placeholder {
+      height: 200px;
+      background: var(--green-50);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      color: var(--green-600);
+    }
+    .map-placeholder-label {
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--neutral-500);
+    }
+    .map-directions {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 16px 20px;
+      border-top: 1px solid var(--neutral-100);
+    }
+    .map-directions a {
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--green-700);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      transition: color var(--dur);
+    }
+    .map-directions a:hover { color: var(--green-900); }
+    .map-address {
+      font-size: 13px;
+      color: var(--neutral-400);
+    }
+
+    /* Facebook card */
+    .fb-card {
+      margin-top: 20px;
+      background: var(--white);
+      border: 1px solid var(--neutral-200);
+      border-radius: var(--r-xl);
+      padding: 20px 24px;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      transition: border-color var(--dur), box-shadow var(--dur);
+    }
+    .fb-card:hover {
+      border-color: var(--green-300);
+      box-shadow: var(--shadow-sm);
+    }
+    .fb-icon {
+      width: 40px;
+      height: 40px;
+      background: #1877F2;
+      border-radius: var(--r-md);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      color: var(--white);
+    }
+    .fb-card-label {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      color: var(--neutral-400);
+      margin-bottom: 2px;
+    }
+    .fb-card-name {
+      font-size: 15px;
+      font-weight: 600;
+      color: var(--neutral-800);
+    }
+    .fb-card-sub {
+      font-size: 12px;
+      color: var(--neutral-400);
+      margin-top: 1px;
+    }
+    .fb-card-arrow {
+      margin-left: auto;
+      color: var(--neutral-300);
+      transition: color var(--dur), transform var(--dur);
+    }
+    .fb-card:hover .fb-card-arrow {
+      color: var(--green-500);
+      transform: translateX(3px);
+    }
+
+    /* Right: form */
+    .contact-form-wrap {
+      background: var(--white);
+      border: 1px solid var(--neutral-200);
+      border-radius: var(--r-2xl);
+      padding: 52px 48px;
+      box-shadow: var(--shadow-md);
+    }
+    .form-header { margin-bottom: 36px; }
+    .form-title {
+      font-family: var(--font-display);
+      font-size: 24px;
+      font-weight: 700;
+      color: var(--green-900);
+      margin-bottom: 6px;
+    }
+    .form-sub {
+      font-size: 14px;
+      color: var(--neutral-500);
+      line-height: 1.6;
+    }
+    .form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      margin-bottom: 16px;
+    }
+    label {
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--neutral-700);
+    }
+    input, textarea, select {
+      font-family: var(--font-body);
+      font-size: 15px;
+      color: var(--neutral-800);
+      background: var(--neutral-50);
+      border: 1.5px solid var(--neutral-200);
+      border-radius: var(--r-md);
+      padding: 12px 16px;
+      width: 100%;
+      transition: border-color var(--dur), box-shadow var(--dur), background var(--dur);
+      outline: none;
+      -webkit-appearance: none;
+    }
+    input::placeholder, textarea::placeholder { color: var(--neutral-400); }
+    input:focus, textarea:focus, select:focus {
+      border-color: var(--green-500);
+      box-shadow: 0 0 0 3px rgba(94,146,71,.14);
+      background: var(--white);
+    }
+    textarea { resize: vertical; min-height: 130px; }
+    .form-submit {
+      margin-top: 8px;
+      width: 100%;
+      justify-content: center;
+      border-radius: var(--r-md);
+      font-size: 15px;
+      padding: 14px 28px;
+    }
+    .form-note {
+      font-size: 12px;
+      color: var(--neutral-400);
+      text-align: center;
+      margin-top: 14px;
+      line-height: 1.5;
+    }
+
+    /* Optionele privacylijn met vinkje */
+    .form-checkbox {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      margin-bottom: 16px;
+      cursor: pointer;
+    }
+    .form-checkbox input[type="checkbox"] {
+      width: 18px;
+      height: 18px;
+      min-width: 18px;
+      padding: 0;
+      margin-top: 1px;
+      accent-color: var(--green-600);
+      cursor: pointer;
+    }
+    .form-checkbox-label {
+      font-size: 13px;
+      color: var(--neutral-600);
+      line-height: 1.5;
+    }
+    .form-checkbox-label a { color: var(--green-700); text-decoration: underline; }
+
+    /* ============================================================
+       FOOTER
+       ============================================================ */
+    .footer {
+      background: var(--green-900);
+      padding: 56px 0 40px;
+    }
+    .footer-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+      flex-wrap: wrap;
+    }
+    .footer-logo img { height: 92px; width: auto; }
+    .footer-copy { font-size: 13px; color: rgba(255,255,255,.65); text-align: center; }
+    .footer-links { display: flex; align-items: center; gap: 16px; }
+    .footer-links a {
+      font-size: 13px;
+      font-weight: 500;
+      color: rgba(255,255,255,.65);
+      transition: color var(--dur);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .footer-links a:hover { color: var(--white); }
+    .footer-fb {
+      border: 1px solid rgba(255,255,255,.2);
+      border-radius: 999px;
+      padding: 7px 16px;
+    }
+    .footer-fb:hover { border-color: rgba(255,255,255,.5); }
+
+    /* ============================================================
+       RESPONSIVE
+       ============================================================ */
+    @media (max-width: 900px) {
+      .contact-grid { grid-template-columns: 1fr; gap: 48px; }
+    }
+    @media (max-width: 700px) {
+      .container { padding-inline: 20px; }
+      .contact-body { padding: 72px 0 80px; }
+      .contact-form-wrap { padding: 36px 28px; }
+      .form-row { grid-template-columns: 1fr; }
+      .nav-panel { display: none; }
+      .nav-toggle { display: flex; }
+      .nav.nav-mobile-open .nav-panel {
+        display: flex;
+        flex-direction: column;
+        position: fixed;
+        inset: 72px 0 0;
+        background: rgba(247,247,244,.98);
+        backdrop-filter: blur(12px);
+        align-items: flex-start;
+        padding: 32px 24px;
+        gap: 8px;
+      }
+      .nav.nav-mobile-open .nav-links {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 4px;
+        width: 100%;
+      }
+      .nav.nav-mobile-open .nav-links a {
+        color: var(--neutral-700);
+        font-size: 18px;
+        padding: 10px 16px;
+        width: 100%;
+        border-radius: var(--r-lg);
+      }
+      .nav.nav-mobile-open .nav-links a:hover { background: var(--green-50); color: var(--green-800); }
+      .nav.nav-mobile-open .nav-cta { margin-top: 16px; width: 100%; justify-content: center; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ============================================================
+       NAV
+       ============================================================ -->
+  <nav class="nav" id="nav">
+    <div class="container">
+      <div class="nav-inner">
+
+        <a href="index.html" class="nav-logo">
+          <div class="nav-logo-wrap">
+            <img class="nav-logo-hero" src="Logo v5.png" alt="Tuinen Janssens">
+            <img class="nav-logo-scrolled" src="Logo verticaal v4.png" alt="Tuinen Janssens">
+          </div>
+        </a>
+
+        <div class="nav-panel">
+          <ul class="nav-links">
+            <li><a href="diensten.html">Diensten</a></li>
+            <li><a href="realisaties.html">Realisaties</a></li>
+            <li><a href="over-ons.html">Over ons</a></li>
+            <li><a href="contact.html" class="active">Contact</a></li>
+          </ul>
+          <a href="contact.html" class="btn btn-primary nav-cta">Offerte aanvragen</a>
+        </div>
+
+        <button class="nav-toggle" id="navToggle" aria-label="Menu openen">
+          <span></span><span></span><span></span>
+        </button>
+
+      </div>
+    </div>
+  </nav>
+
+  <!-- ============================================================
+       PAGE HEADER
+       ============================================================ -->
+  <header class="page-header">
+    <div class="page-header-bg"></div>
+    <div class="page-header-overlay"></div>
+    <div class="container">
+      <div class="page-header-content">
+        <p class="page-header-label">Neem contact op</p>
+        <h1 class="page-header-title">Laat van <em>u horen</em></h1>
+        <p class="page-header-sub">Heeft u een tuinproject in gedachten? Stuur een bericht of bel ons. We nemen zo snel mogelijk contact op voor een vrijblijvend gesprek.</p>
+      </div>
+    </div>
+  </header>
+
+  <!-- ============================================================
+       CONTACT BODY
+       ============================================================ -->
+  <section class="contact-body">
+    <div class="container">
+      <div class="contact-grid">
+
+        <!-- Left: info + map -->
+        <div>
+          <p class="label reveal">Contactgegevens</p>
+          <h2 class="contact-info-title reveal reveal-delay-1">
+            Rechtstreeks contact<br>met Bram
+          </h2>
+          <p class="contact-info-sub reveal reveal-delay-2">
+            Actief in Harelbeke en de ruimere omgeving.
+            Bereikbaar op werkdagen van 08:30 tot 17:30.
+          </p>
+
+          <div class="info-items reveal reveal-delay-2">
+
+            <div class="info-item">
+              <div class="info-item-icon">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.61 3.4 2 2 0 0 1 3.6 1.22h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L7.91 8.9a16 16 0 0 0 6 6l.92-.92a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 21.73 16.92Z"/>
+                </svg>
+              </div>
+              <div>
+                <div class="info-item-label">Telefoon</div>
+                <div class="info-item-value">
+                  <a href="tel:+32472024162">+32 (0) 472 02 41 62</a>
+                </div>
+              </div>
+            </div>
+
+            <div class="info-item">
+              <div class="info-item-icon">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <rect width="20" height="16" x="2" y="4" rx="2"/>
+                  <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/>
+                </svg>
+              </div>
+              <div>
+                <div class="info-item-label">E-mail</div>
+                <div class="info-item-value">
+                  <a href="mailto:janssens.bram@outlook.be">janssens.bram@outlook.be</a>
+                </div>
+              </div>
+            </div>
+
+            <div class="info-item">
+              <div class="info-item-icon">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/>
+                  <circle cx="12" cy="10" r="3"/>
+                </svg>
+              </div>
+              <div>
+                <div class="info-item-label">Adres</div>
+                <div class="info-item-value">
+                  Veldstraat 4<br>8530 Harelbeke
+                </div>
+              </div>
+            </div>
+
+            <div class="info-item">
+              <div class="info-item-icon">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <circle cx="12" cy="12" r="10"/>
+                  <polyline points="12 6 12 12 16 14"/>
+                </svg>
+              </div>
+              <div>
+                <div class="info-item-label">Openingstijden</div>
+                <div class="info-item-value">
+                  Maandag – Vrijdag: 08:30 – 17:30<br>
+                  <span style="color: var(--neutral-500); font-size: 13px; font-weight: 400;">Zaterdag &amp; Zondag: gesloten</span>
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+          <!-- Map -->
+          <div class="map-wrap reveal reveal-delay-3">
+            <iframe
+              src="https://maps.google.com/maps?q=Veldstraat+4,+8530+Harelbeke&t=&z=15&ie=UTF8&iwloc=&output=embed"
+              title="Locatie Tuinen Janssens — Veldstraat 4, 8530 Harelbeke"
+              loading="lazy"
+              referrerpolicy="no-referrer-when-downgrade"
+              allowfullscreen
+            ></iframe>
+            <div class="map-directions">
+              <a href="https://maps.google.com/?q=Veldstraat+4,+8530+Harelbeke" target="_blank" rel="noopener">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+                Route plannen
+              </a>
+              <span class="map-address">Harelbeke, West-Vlaanderen</span>
+            </div>
+          </div>
+
+          <!-- Facebook card -->
+          <a href="https://www.facebook.com/p/Tuinen-Janssens-100054644550594/" target="_blank" rel="noopener" class="fb-card reveal reveal-delay-3">
+            <div class="fb-icon">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/>
+              </svg>
+            </div>
+            <div>
+              <div class="fb-card-label">Facebook</div>
+              <div class="fb-card-name">Tuinen Janssens</div>
+              <div class="fb-card-sub">Volg ons voor recente projecten</div>
+            </div>
+            <div class="fb-card-arrow">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+            </div>
+          </a>
+        </div>
+
+        <!-- Right: form -->
+        <div class="contact-form-wrap reveal reveal-delay-2">
+          <div class="form-header">
+            <h3 class="form-title">Stuur een bericht</h3>
+            <p class="form-sub">
+              Vul het formulier in en we nemen zo snel mogelijk contact met u op.
+              Vrijblijvend, zonder verplichtingen.
+            </p>
+          </div>
+
+          <form>
+            <div class="form-row">
+              <div class="form-group">
+                <label for="naam">Naam</label>
+                <input type="text" id="naam" name="naam" placeholder="Jan Janssen" autocomplete="name" required>
+              </div>
+              <div class="form-group">
+                <label for="telefoon">Telefoon</label>
+                <input type="tel" id="telefoon" name="telefoon" placeholder="0470 00 00 00" autocomplete="tel">
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="email">E-mailadres</label>
+              <input type="email" id="email" name="email" placeholder="naam@email.com" autocomplete="email" required>
+            </div>
+
+            <div class="form-group">
+              <label for="dienst">Waarvoor wenst u contact?</label>
+              <select id="dienst" name="dienst">
+                <option value="">Kies een onderwerp…</option>
+                <option value="ontwerp">Tuinontwerp</option>
+                <option value="aanleg">Tuinaanleg</option>
+                <option value="onderhoud">Tuinonderhoud</option>
+                <option value="offerte">Vrijblijvende offerte</option>
+                <option value="anders">Andere vraag</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label for="bericht">Uw bericht</label>
+              <textarea id="bericht" name="bericht" placeholder="Vertel ons iets over uw tuin of project…"></textarea>
+            </div>
+
+            <label class="form-checkbox">
+              <input type="checkbox" name="privacy" required>
+              <span class="form-checkbox-label">
+                Ik ga akkoord met het verwerken van mijn gegevens om contact op te nemen.
+              </span>
+            </label>
+
+            <button type="submit" class="btn btn-primary form-submit">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m22 2-7 20-4-9-9-4 20-7z"/><path d="M22 2 11 13"/></svg>
+              Verstuur bericht
+            </button>
+
+            <p class="form-note">
+              We streven ernaar binnen 1–2 werkdagen te antwoorden.
+            </p>
+          </form>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       FOOTER
+       ============================================================ -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-inner">
+
+        <a href="index.html" class="footer-logo">
+          <img src="Logo v5.png" alt="Tuinen Janssens">
+        </a>
+
+        <p class="footer-copy">
+          &copy; 2026 Tuinen Janssens &middot; Bram Janssens<br>
+          Veldstraat 4, 8530 Harelbeke
+        </p>
+
+        <div class="footer-links">
+          <a href="https://www.facebook.com/p/Tuinen-Janssens-100054644550594/" target="_blank" rel="noopener" class="footer-fb">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/>
+            </svg>
+            Facebook
+          </a>
+        </div>
+
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    const nav = document.getElementById('nav');
+    window.addEventListener('scroll', () => {
+      nav.classList.toggle('scrolled', window.scrollY > 40);
+    }, { passive: true });
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); }
+      });
+    }, { threshold: 0.10, rootMargin: '0px 0px -32px 0px' });
+    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+    document.getElementById('navToggle').addEventListener('click', () => nav.classList.toggle('nav-mobile-open'));
+    document.querySelectorAll('.nav-panel a').forEach(l => l.addEventListener('click', () => nav.classList.remove('nav-mobile-open')));
+  </script>
+
+</body>
+</html>

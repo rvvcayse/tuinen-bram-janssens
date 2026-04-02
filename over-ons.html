@@ -1,0 +1,893 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Over ons — Tuinen Janssens uit Harelbeke</title>
+  <meta name="description" content="Leer Bram Janssens kennen. Tuinen Janssens is een eenmanszaak in Harelbeke die tuinen ontwerpt, aanlegt en onderhoudt met vakmanschap en oog voor detail.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <style>
+    /* ============================================================
+       TOKENS
+       ============================================================ */
+    :root {
+      --green-900: #1A2E14;
+      --green-800: #2D4A22;
+      --green-700: #3D6130;
+      --green-600: #4E7A3C;
+      --green-500: #5E9247;
+      --green-400: #7CAF62;
+      --green-300: #A4C98C;
+      --green-200: #C8DFB6;
+      --green-100: #E6F2DA;
+      --green-50:  #F3F9EE;
+
+      --orange-700: #9E4318;
+      --orange-600: #B84F1C;
+      --orange-500: #C8581F;
+      --orange-400: #D96B30;
+      --orange-300: #E88F5E;
+      --orange-100: #FAD9C3;
+      --orange-50:  #FDF0E8;
+
+      --neutral-900: #1C1C1A;
+      --neutral-800: #2E2D2A;
+      --neutral-700: #474540;
+      --neutral-600: #605E58;
+      --neutral-500: #7A7870;
+      --neutral-400: #9A9890;
+      --neutral-300: #BBBAB3;
+      --neutral-200: #D5D4CC;
+      --neutral-100: #EDECE8;
+      --neutral-50:  #F7F7F4;
+      --white: #FFFFFF;
+
+      --font-display: 'Playfair Display', Georgia, serif;
+      --font-body:    'DM Sans', system-ui, sans-serif;
+
+      --r-sm:  4px;
+      --r-md:  8px;
+      --r-lg:  16px;
+      --r-xl:  24px;
+      --r-2xl: 32px;
+
+      --shadow-sm: 0 1px 3px rgba(28,28,26,.08), 0 1px 2px rgba(28,28,26,.04);
+      --shadow-md: 0 4px 12px rgba(28,28,26,.10), 0 2px 4px rgba(28,28,26,.06);
+      --shadow-lg: 0 12px 32px rgba(28,28,26,.12), 0 4px 8px rgba(28,28,26,.06);
+
+      --ease: cubic-bezier(0.16, 1, 0.3, 1);
+      --dur:  300ms;
+    }
+
+    /* ============================================================
+       RESET & BASE
+       ============================================================ */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; font-size: 16px; }
+    body {
+      font-family: var(--font-body);
+      background: var(--neutral-50);
+      color: var(--neutral-800);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+    img { display: block; max-width: 100%; }
+    a { color: inherit; text-decoration: none; }
+    ul { list-style: none; }
+
+    /* ============================================================
+       UTILITIES
+       ============================================================ */
+    .container {
+      max-width: 1160px;
+      margin-inline: auto;
+      padding-inline: 32px;
+    }
+    .label {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+      color: var(--orange-500);
+    }
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-family: var(--font-body);
+      font-size: 14px;
+      font-weight: 600;
+      border-radius: 999px;
+      padding: 12px 28px;
+      cursor: pointer;
+      border: 2px solid transparent;
+      transition: background var(--dur) var(--ease),
+                  color var(--dur) var(--ease),
+                  border-color var(--dur) var(--ease),
+                  box-shadow var(--dur) var(--ease),
+                  transform 150ms var(--ease);
+      white-space: nowrap;
+    }
+    .btn:hover { transform: translateY(-1px); }
+    .btn:active { transform: translateY(0); }
+    .btn-primary {
+      background: var(--orange-500);
+      color: var(--white);
+      box-shadow: 0 4px 16px rgba(200,88,31,.30);
+    }
+    .btn-primary:hover {
+      background: var(--orange-400);
+      box-shadow: 0 6px 24px rgba(200,88,31,.40);
+    }
+    .btn-outline-green {
+      background: transparent;
+      color: var(--green-700);
+      border-color: var(--green-300);
+    }
+    .btn-outline-green:hover {
+      background: var(--green-50);
+      border-color: var(--green-500);
+    }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity 0.65s var(--ease), transform 0.65s var(--ease);
+    }
+    .reveal.visible { opacity: 1; transform: none; }
+    .reveal-delay-1 { transition-delay: 100ms; }
+    .reveal-delay-2 { transition-delay: 200ms; }
+    .reveal-delay-3 { transition-delay: 300ms; }
+    .reveal-delay-4 { transition-delay: 400ms; }
+
+    /* ============================================================
+       NAV
+       ============================================================ */
+    .nav {
+      position: fixed;
+      inset-block-start: 0;
+      inset-inline: 0;
+      z-index: 100;
+      transition: background var(--dur) var(--ease),
+                  box-shadow var(--dur) var(--ease),
+                  backdrop-filter var(--dur) var(--ease);
+    }
+    .nav.scrolled {
+      background: rgba(247,247,244,.95);
+      backdrop-filter: blur(8px);
+      box-shadow: 0 1px 0 rgba(28,28,26,.08);
+    }
+    .nav-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 72px;
+      gap: 32px;
+    }
+    .nav-logo {
+      display: block;
+    }
+    .nav-logo-wrap {
+      position: relative;
+      height: 96px;
+      width: 240px;
+      transition: height 400ms var(--ease), width 400ms var(--ease);
+    }
+    .nav.scrolled .nav-logo-wrap {
+      height: 80px;
+      width: 200px;
+    }
+    .nav-logo-hero,
+    .nav-logo-scrolled {
+      position: absolute;
+      top: 0;
+      left: 0;
+      height: 100%;
+      width: auto;
+      transition: opacity 400ms var(--ease),
+                  filter 400ms var(--ease);
+    }
+    .nav-logo-hero {
+      opacity: 1;
+      filter: drop-shadow(0 0 10px rgba(255,255,255,.45))
+              drop-shadow(0 2px 4px rgba(0,0,0,.25));
+    }
+    .nav-logo-scrolled { opacity: 0; }
+    .nav.scrolled .nav-logo-hero { opacity: 0; filter: none; }
+    .nav.scrolled .nav-logo-scrolled { opacity: 1; }
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .nav-links a {
+      font-size: 14px;
+      font-weight: 500;
+      color: var(--white);
+      padding: 6px 14px;
+      border-radius: 999px;
+      transition: color var(--dur), background var(--dur);
+    }
+    .nav-links a.active {
+      background: rgba(255,255,255,.18);
+    }
+    .nav.scrolled .nav-links a { color: var(--neutral-700); }
+    .nav.scrolled .nav-links a.active {
+      background: var(--green-50);
+      color: var(--green-800);
+    }
+    .nav-links a:hover { background: rgba(255,255,255,.15); }
+    .nav.scrolled .nav-links a:hover { background: var(--green-50); color: var(--green-800); }
+    .nav-cta { flex-shrink: 0; }
+    .nav-panel { display: flex; align-items: center; gap: 32px; }
+    .nav-toggle {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      cursor: pointer;
+      padding: 6px;
+      background: none;
+      border: none;
+    }
+    .nav-toggle span {
+      display: block;
+      width: 22px;
+      height: 2px;
+      background: var(--white);
+      border-radius: 2px;
+      transition: background var(--dur);
+    }
+    .nav.scrolled .nav-toggle span { background: var(--neutral-800); }
+
+    /* ============================================================
+       PAGE HEADER
+       ============================================================ */
+    .page-header {
+      position: relative;
+      height: 52vh;
+      min-height: 340px;
+      display: flex;
+      align-items: flex-end;
+      padding-bottom: 64px;
+      overflow: hidden;
+    }
+    .page-header-bg {
+      position: absolute;
+      inset: 0;
+      background-image: url('509230108_1308454614319345_1566048337373865804_n.jpg');
+      background-size: cover;
+      background-position: center 30%;
+    }
+    .page-header-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(
+        to bottom,
+        rgba(26,46,20,.45) 0%,
+        rgba(26,46,20,.82) 100%
+      );
+    }
+    .page-header-content {
+      position: relative;
+      z-index: 1;
+    }
+    .page-header-label {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+      color: var(--orange-300);
+      margin-bottom: 12px;
+    }
+    .page-header-title {
+      font-family: var(--font-display);
+      font-size: clamp(36px, 6vw, 64px);
+      font-weight: 700;
+      color: var(--white);
+      line-height: 1.1;
+    }
+    .page-header-title em {
+      font-style: italic;
+      color: var(--green-300);
+    }
+    .page-header-sub {
+      margin-top: 16px;
+      font-size: 16px;
+      color: rgba(255,255,255,.75);
+      max-width: 480px;
+      line-height: 1.75;
+    }
+
+    /* ============================================================
+       INTRO SECTION
+       ============================================================ */
+    .intro {
+      padding: 112px 0 96px;
+    }
+    .intro-inner {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 88px;
+      align-items: start;
+    }
+    .intro-visual {
+      position: sticky;
+      top: 104px;
+    }
+    .intro-img-wrap {
+      border-radius: var(--r-2xl);
+      overflow: hidden;
+      aspect-ratio: 4/5;
+      box-shadow: var(--shadow-lg);
+      position: relative;
+    }
+    .intro-img-wrap img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center 20%;
+      filter: brightness(.95) saturate(1.05);
+    }
+    .intro-badge {
+      position: absolute;
+      bottom: 24px;
+      left: 24px;
+      background: var(--orange-500);
+      color: var(--white);
+      border-radius: var(--r-xl);
+      padding: 18px 22px;
+      box-shadow: 0 8px 32px rgba(200,88,31,.40);
+    }
+    .intro-badge-year {
+      font-family: var(--font-display);
+      font-size: 26px;
+      font-weight: 700;
+      line-height: 1;
+    }
+    .intro-badge-label {
+      font-size: 12px;
+      font-weight: 500;
+      opacity: .85;
+      margin-top: 4px;
+    }
+    .intro-content {}
+    .intro-title {
+      font-family: var(--font-display);
+      font-size: clamp(26px, 3.5vw, 40px);
+      font-weight: 700;
+      color: var(--green-900);
+      line-height: 1.15;
+      margin-top: 10px;
+      margin-bottom: 24px;
+    }
+    .intro-text {
+      font-size: 16px;
+      color: var(--neutral-600);
+      line-height: 1.85;
+    }
+    .intro-text + .intro-text { margin-top: 16px; }
+    .intro-name-block {
+      margin-top: 40px;
+      padding: 24px;
+      background: var(--green-50);
+      border: 1px solid var(--green-200);
+      border-radius: var(--r-xl);
+      display: flex;
+      align-items: center;
+      gap: 18px;
+    }
+    .intro-name-avatar {
+      width: 52px;
+      height: 52px;
+      background: var(--green-200);
+      border-radius: 50%;
+      flex-shrink: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--green-800);
+    }
+    .intro-name-text {}
+    .intro-name {
+      font-family: var(--font-display);
+      font-size: 16px;
+      font-weight: 700;
+      color: var(--green-900);
+    }
+    .intro-name-role {
+      font-size: 13px;
+      color: var(--neutral-500);
+      margin-top: 2px;
+    }
+
+    /* ============================================================
+       STATS STRIP
+       ============================================================ */
+    .stats-strip {
+      padding: 0 0 96px;
+    }
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 2px;
+      border-radius: var(--r-xl);
+      overflow: hidden;
+      background: var(--neutral-200);
+    }
+    .stat-cell {
+      background: var(--white);
+      padding: 40px 32px;
+      text-align: center;
+    }
+    .stat-number {
+      font-family: var(--font-display);
+      font-size: 42px;
+      font-weight: 700;
+      color: var(--green-900);
+      line-height: 1;
+      margin-bottom: 8px;
+    }
+    .stat-label {
+      font-size: 13px;
+      color: var(--neutral-500);
+      font-weight: 500;
+    }
+
+    /* ============================================================
+       WAARDEN
+       ============================================================ */
+    .waarden {
+      padding: 96px 0;
+      background: var(--green-900);
+      position: relative;
+      overflow: hidden;
+    }
+    .waarden::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse at 80% 50%, rgba(93,146,71,.16) 0%, transparent 55%);
+      pointer-events: none;
+    }
+    .waarden-header {
+      margin-bottom: 64px;
+    }
+    .waarden .label { color: var(--green-400); }
+    .waarden-title {
+      font-family: var(--font-display);
+      font-size: clamp(26px, 3.5vw, 38px);
+      font-weight: 700;
+      color: var(--white);
+      line-height: 1.2;
+      margin-top: 8px;
+    }
+    .waarden-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+    }
+    .waarde-card {
+      background: rgba(255,255,255,.05);
+      border: 1px solid rgba(255,255,255,.10);
+      border-radius: var(--r-xl);
+      padding: 40px 36px;
+      transition: background var(--dur), border-color var(--dur);
+    }
+    .waarde-card:hover {
+      background: rgba(255,255,255,.08);
+      border-color: rgba(255,255,255,.18);
+    }
+    .waarde-icon {
+      width: 48px;
+      height: 48px;
+      background: rgba(164,201,140,.15);
+      border-radius: var(--r-lg);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--green-300);
+      margin-bottom: 24px;
+    }
+    .waarde-title {
+      font-family: var(--font-display);
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--white);
+      margin-bottom: 12px;
+      line-height: 1.3;
+    }
+    .waarde-desc {
+      font-size: 14px;
+      color: rgba(255,255,255,.60);
+      line-height: 1.75;
+    }
+
+    /* ============================================================
+       CTA BAND
+       ============================================================ */
+    .cta-band {
+      padding: 96px 0;
+    }
+    .cta-band-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 48px;
+      flex-wrap: wrap;
+    }
+    .cta-band-copy .label { margin-bottom: 8px; }
+    .cta-band-title {
+      font-family: var(--font-display);
+      font-size: clamp(24px, 3.5vw, 36px);
+      font-weight: 700;
+      color: var(--green-900);
+      line-height: 1.2;
+      margin-bottom: 12px;
+    }
+    .cta-band-title em { font-style: italic; color: var(--green-600); }
+    .cta-band-sub {
+      font-size: 15px;
+      color: var(--neutral-600);
+      max-width: 420px;
+      line-height: 1.7;
+    }
+    .cta-band-actions {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      flex-shrink: 0;
+      flex-wrap: wrap;
+    }
+
+    /* ============================================================
+       FOOTER
+       ============================================================ */
+    .footer {
+      background: var(--green-900);
+      padding: 56px 0 40px;
+    }
+    .footer-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+      flex-wrap: wrap;
+    }
+    .footer-logo img { height: 92px; width: auto; }
+    .footer-copy { font-size: 13px; color: rgba(255,255,255,.65); text-align: center; }
+    .footer-links { display: flex; align-items: center; gap: 16px; }
+    .footer-links a {
+      font-size: 13px;
+      font-weight: 500;
+      color: rgba(255,255,255,.65);
+      transition: color var(--dur);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .footer-links a:hover { color: var(--white); }
+    .footer-fb {
+      border: 1px solid rgba(255,255,255,.2);
+      border-radius: 999px;
+      padding: 7px 16px;
+    }
+    .footer-fb:hover { border-color: rgba(255,255,255,.5); }
+
+    /* ============================================================
+       RESPONSIVE
+       ============================================================ */
+    @media (max-width: 900px) {
+      .intro-inner { grid-template-columns: 1fr; gap: 48px; }
+      .intro-visual { position: static; }
+      .intro-img-wrap { aspect-ratio: 16/9; }
+      .stats-grid { grid-template-columns: 1fr 1fr; }
+      .waarden-grid { grid-template-columns: 1fr; gap: 16px; }
+    }
+    @media (max-width: 700px) {
+      .container { padding-inline: 20px; }
+      .intro { padding: 72px 0 64px; }
+      .stats-strip { padding: 0 0 64px; }
+      .waarden { padding: 72px 0; }
+      .cta-band { padding: 72px 0; }
+      .cta-band-inner { flex-direction: column; align-items: flex-start; }
+      .nav-panel { display: none; }
+      .nav-toggle { display: flex; }
+      .nav.nav-mobile-open .nav-panel {
+        display: flex;
+        flex-direction: column;
+        position: fixed;
+        inset: 72px 0 0;
+        background: rgba(247,247,244,.98);
+        backdrop-filter: blur(12px);
+        align-items: flex-start;
+        padding: 32px 24px;
+        gap: 8px;
+      }
+      .nav.nav-mobile-open .nav-links {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 4px;
+        width: 100%;
+      }
+      .nav.nav-mobile-open .nav-links a {
+        color: var(--neutral-700);
+        font-size: 18px;
+        padding: 10px 16px;
+        width: 100%;
+        border-radius: var(--r-lg);
+      }
+      .nav.nav-mobile-open .nav-links a:hover { background: var(--green-50); color: var(--green-800); }
+      .nav.nav-mobile-open .nav-cta { margin-top: 16px; width: 100%; justify-content: center; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ============================================================
+       NAV
+       ============================================================ -->
+  <nav class="nav" id="nav">
+    <div class="container">
+      <div class="nav-inner">
+
+        <a href="index.html" class="nav-logo">
+          <div class="nav-logo-wrap">
+            <img class="nav-logo-hero" src="Logo v5.png" alt="Tuinen Janssens">
+            <img class="nav-logo-scrolled" src="Logo verticaal v4.png" alt="Tuinen Janssens">
+          </div>
+        </a>
+
+        <div class="nav-panel">
+          <ul class="nav-links">
+            <li><a href="diensten.html">Diensten</a></li>
+            <li><a href="realisaties.html">Realisaties</a></li>
+            <li><a href="over-ons.html" class="active">Over ons</a></li>
+            <li><a href="contact.html">Contact</a></li>
+          </ul>
+          <a href="contact.html" class="btn btn-primary nav-cta">Offerte aanvragen</a>
+        </div>
+
+        <button class="nav-toggle" id="navToggle" aria-label="Menu openen">
+          <span></span><span></span><span></span>
+        </button>
+
+      </div>
+    </div>
+  </nav>
+
+  <!-- ============================================================
+       PAGE HEADER
+       ============================================================ -->
+  <header class="page-header">
+    <div class="page-header-bg"></div>
+    <div class="page-header-overlay"></div>
+    <div class="container">
+      <div class="page-header-content">
+        <p class="page-header-label">Wie zijn wij</p>
+        <h1 class="page-header-title">Vakmanschap met een <em>groen hart</em></h1>
+        <p class="page-header-sub">Tuinen Janssens is een eenmanszaak in Harelbeke geleid door Bram Janssens. Persoonlijk advies, kwaliteitsvol werk en een totaalaanbod van A tot Z.</p>
+      </div>
+    </div>
+  </header>
+
+  <!-- ============================================================
+       INTRO
+       ============================================================ -->
+  <section class="intro">
+    <div class="container">
+      <div class="intro-inner">
+
+        <!-- Visual -->
+        <div class="intro-visual reveal">
+          <div class="intro-img-wrap">
+            <img
+              src="Projectfoto's/510226915_1309700247528115_6538786310940227683_n.jpg"
+              alt="Aangelegde tuin met fruitboom en gazon door Tuinen Janssens"
+            >
+            <div class="intro-badge">
+              <div class="intro-badge-year">2018</div>
+              <div class="intro-badge-label">Opgericht in Harelbeke</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Content -->
+        <div class="intro-content">
+          <p class="label reveal">Over Bram Janssens</p>
+          <h2 class="intro-title reveal reveal-delay-1">
+            Van tuindroom<br>tot droomtuin
+          </h2>
+
+          <p class="intro-text reveal reveal-delay-2">
+            Tuinen Janssens werd opgericht op 14 juni 2018 door <strong>Bram Janssens</strong>,
+            gevestigd in Veldstraat 4, 8530 Harelbeke. Wat begon als een passie voor groen en
+            buitenruimtes, groeide uit tot een volwaardig tuinbedrijf dat particulieren in
+            Harelbeke en ruime omgeving bedient.
+          </p>
+          <p class="intro-text reveal reveal-delay-2">
+            Bram neemt elk project persoonlijk op: van het eerste gesprek en het ontwerp tot
+            de volledige aanleg en het jaarlijkse onderhoud. Geen doorverwijzingen, geen
+            anoniem team — u heeft steeds direct contact met de man die zijn vak verstaat.
+          </p>
+          <p class="intro-text reveal reveal-delay-3">
+            Of u nu een kleine stadstuintje wil laten transformeren of een volledige
+            landschapstuin laat aanleggen: elk project krijgt dezelfde aandacht en zorg.
+            Groot of klein, klassiek of modern — Tuinen Janssens levert kwaliteit.
+          </p>
+
+          <div class="intro-name-block reveal reveal-delay-4">
+            <div class="intro-name-avatar">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
+                <circle cx="12" cy="7" r="4"/>
+              </svg>
+            </div>
+            <div class="intro-name-text">
+              <div class="intro-name">Bram Janssens</div>
+              <div class="intro-name-role">Zaakvoerder &amp; tuinarchitect · Harelbeke</div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       STATS STRIP
+       ============================================================ -->
+  <section class="stats-strip">
+    <div class="container">
+      <div class="stats-grid">
+        <div class="stat-cell reveal">
+          <div class="stat-number">7+</div>
+          <div class="stat-label">Jaar ervaring</div>
+        </div>
+        <div class="stat-cell reveal reveal-delay-1">
+          <div class="stat-number">A–Z</div>
+          <div class="stat-label">Totaalaanbod</div>
+        </div>
+        <div class="stat-cell reveal reveal-delay-2">
+          <div class="stat-number">100%</div>
+          <div class="stat-label">Werk op maat</div>
+        </div>
+        <div class="stat-cell reveal reveal-delay-3">
+          <div class="stat-number">2018</div>
+          <div class="stat-label">Opgericht</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       WAARDEN
+       ============================================================ -->
+  <section class="waarden">
+    <div class="container">
+
+      <div class="waarden-header reveal">
+        <p class="label">Onze aanpak</p>
+        <h2 class="waarden-title">Waarvoor Tuinen Janssens staat</h2>
+      </div>
+
+      <div class="waarden-grid">
+
+        <div class="waarde-card reveal">
+          <div class="waarde-icon">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
+              <circle cx="12" cy="7" r="4"/>
+            </svg>
+          </div>
+          <h3 class="waarde-title">Persoonlijk contact</h3>
+          <p class="waarde-desc">
+            U werkt rechtstreeks met Bram. Geen tussenpersonen, geen onduidelijkheid.
+            Hij kent uw tuin, uw wensen en uw budget van begin tot einde.
+          </p>
+        </div>
+
+        <div class="waarde-card reveal reveal-delay-1">
+          <div class="waarde-icon">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="20 6 9 17 4 12"/>
+            </svg>
+          </div>
+          <h3 class="waarde-title">Kwaliteit in elk detail</h3>
+          <p class="waarde-desc">
+            Van de materiaalkeuze tot de laatste plant: elk detail telt. Bram werkt
+            nauwgezet en levert pas op als hij tevreden is met het resultaat.
+          </p>
+        </div>
+
+        <div class="waarde-card reveal reveal-delay-2">
+          <div class="waarde-icon">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="12" cy="12" r="10"/>
+              <path d="M12 6v6l4 2"/>
+            </svg>
+          </div>
+          <h3 class="waarde-title">Van A tot Z</h3>
+          <p class="waarde-desc">
+            Ontwerp, aanleg en onderhoud onder één dak. U hoeft niet te coördineren
+            tussen verschillende aannemers — Tuinen Janssens regelt alles.
+          </p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       CTA BAND
+       ============================================================ -->
+  <section class="cta-band">
+    <div class="container">
+      <div class="cta-band-inner">
+
+        <div class="cta-band-copy reveal">
+          <p class="label">Aan de slag</p>
+          <h2 class="cta-band-title">Benieuwd wat Bram<br>voor uw tuin kan doen?</h2>
+          <p class="cta-band-sub">
+            Neem contact op voor een vrijblijvend gesprek. We bekijken samen
+            de mogelijkheden voor uw tuin in Harelbeke en omgeving.
+          </p>
+        </div>
+
+        <div class="cta-band-actions reveal reveal-delay-2">
+          <a href="contact.html" class="btn btn-primary">Neem contact op</a>
+          <a href="diensten.html" class="btn btn-outline-green">Onze diensten</a>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       FOOTER
+       ============================================================ -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-inner">
+
+        <a href="index.html" class="footer-logo">
+          <img src="Logo v5.png" alt="Tuinen Janssens">
+        </a>
+
+        <p class="footer-copy">
+          &copy; 2026 Tuinen Janssens &middot; Bram Janssens<br>
+          Veldstraat 4, 8530 Harelbeke
+        </p>
+
+        <div class="footer-links">
+          <a href="https://www.facebook.com/p/Tuinen-Janssens-100054644550594/" target="_blank" rel="noopener" class="footer-fb">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/>
+            </svg>
+            Facebook
+          </a>
+        </div>
+
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    const nav = document.getElementById('nav');
+    window.addEventListener('scroll', () => {
+      nav.classList.toggle('scrolled', window.scrollY > 40);
+    }, { passive: true });
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); }
+      });
+    }, { threshold: 0.10, rootMargin: '0px 0px -32px 0px' });
+    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+    document.getElementById('navToggle').addEventListener('click', () => nav.classList.toggle('nav-mobile-open'));
+    document.querySelectorAll('.nav-panel a').forEach(l => l.addEventListener('click', () => nav.classList.remove('nav-mobile-open')));
+  </script>
+
+</body>
+</html>

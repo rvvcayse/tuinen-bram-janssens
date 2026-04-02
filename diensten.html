@@ -1,0 +1,1424 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Diensten — Tuinen Janssens uit Harelbeke</title>
+  <meta name="description" content="Tuinontwerp, tuinaanleg en tuinonderhoud in Harelbeke en omgeving. Bram Janssens begeleidt elk project van A tot Z — van eerste schets tot perfecte afwerking.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <style>
+    /* ============================================================
+       TOKENS
+       ============================================================ */
+    :root {
+      --green-900: #1A2E14;
+      --green-800: #2D4A22;
+      --green-700: #3D6130;
+      --green-600: #4E7A3C;
+      --green-500: #5E9247;
+      --green-400: #7CAF62;
+      --green-300: #A4C98C;
+      --green-200: #C8DFB6;
+      --green-100: #E6F2DA;
+      --green-50:  #F3F9EE;
+
+      --orange-700: #9E4318;
+      --orange-600: #B84F1C;
+      --orange-500: #C8581F;
+      --orange-400: #D96B30;
+      --orange-300: #E88F5E;
+      --orange-100: #FAD9C3;
+      --orange-50:  #FDF0E8;
+
+      --neutral-900: #1C1C1A;
+      --neutral-800: #2E2D2A;
+      --neutral-700: #474540;
+      --neutral-600: #605E58;
+      --neutral-500: #7A7870;
+      --neutral-400: #9A9890;
+      --neutral-300: #BBBAB3;
+      --neutral-200: #D5D4CC;
+      --neutral-100: #EDECE8;
+      --neutral-50:  #F7F7F4;
+      --white: #FFFFFF;
+
+      --font-display: 'Playfair Display', Georgia, serif;
+      --font-body:    'DM Sans', system-ui, sans-serif;
+
+      --r-sm:  4px;
+      --r-md:  8px;
+      --r-lg:  16px;
+      --r-xl:  24px;
+      --r-2xl: 32px;
+
+      --shadow-sm: 0 1px 3px rgba(28,28,26,.08), 0 1px 2px rgba(28,28,26,.04);
+      --shadow-md: 0 4px 12px rgba(28,28,26,.10), 0 2px 4px rgba(28,28,26,.06);
+      --shadow-lg: 0 12px 32px rgba(28,28,26,.12), 0 4px 8px rgba(28,28,26,.06);
+
+      --ease: cubic-bezier(0.16, 1, 0.3, 1);
+      --dur:  300ms;
+    }
+
+    /* ============================================================
+       RESET & BASE
+       ============================================================ */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; font-size: 16px; }
+    body {
+      font-family: var(--font-body);
+      background: var(--neutral-50);
+      color: var(--neutral-800);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+    img { display: block; max-width: 100%; }
+    a { color: inherit; text-decoration: none; }
+    ul { list-style: none; }
+
+    /* ============================================================
+       UTILITIES
+       ============================================================ */
+    .container {
+      max-width: 1160px;
+      margin-inline: auto;
+      padding-inline: 32px;
+    }
+    .label {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+      color: var(--orange-500);
+    }
+    .section-title {
+      font-family: var(--font-display);
+      font-size: clamp(28px, 4vw, 38px);
+      font-weight: 700;
+      color: var(--green-900);
+      line-height: 1.2;
+      margin-top: 8px;
+    }
+    .section-intro {
+      font-size: 16px;
+      color: var(--neutral-600);
+      max-width: 520px;
+      margin-top: 16px;
+      line-height: 1.75;
+    }
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-family: var(--font-body);
+      font-size: 14px;
+      font-weight: 600;
+      border-radius: 999px;
+      padding: 12px 28px;
+      cursor: pointer;
+      border: 2px solid transparent;
+      transition: background var(--dur) var(--ease),
+                  color var(--dur) var(--ease),
+                  border-color var(--dur) var(--ease),
+                  box-shadow var(--dur) var(--ease),
+                  transform 150ms var(--ease);
+      white-space: nowrap;
+    }
+    .btn:hover { transform: translateY(-1px); }
+    .btn:active { transform: translateY(0); }
+    .btn-primary {
+      background: var(--orange-500);
+      color: var(--white);
+      box-shadow: 0 4px 16px rgba(200,88,31,.30);
+    }
+    .btn-primary:hover {
+      background: var(--orange-400);
+      box-shadow: 0 6px 24px rgba(200,88,31,.40);
+    }
+    .btn-ghost-light {
+      background: transparent;
+      color: var(--white);
+      border-color: rgba(255,255,255,.5);
+    }
+    .btn-ghost-light:hover {
+      background: rgba(255,255,255,.12);
+      border-color: rgba(255,255,255,.8);
+    }
+    .btn-outline-green {
+      background: transparent;
+      color: var(--green-700);
+      border-color: var(--green-300);
+    }
+    .btn-outline-green:hover {
+      background: var(--green-50);
+      border-color: var(--green-500);
+    }
+
+    /* Fade-in on scroll */
+    .reveal {
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity 0.65s var(--ease), transform 0.65s var(--ease);
+    }
+    .reveal.visible {
+      opacity: 1;
+      transform: none;
+    }
+    .reveal-delay-1 { transition-delay: 100ms; }
+    .reveal-delay-2 { transition-delay: 200ms; }
+    .reveal-delay-3 { transition-delay: 300ms; }
+    .reveal-delay-4 { transition-delay: 400ms; }
+
+    /* ============================================================
+       NAV
+       ============================================================ */
+    .nav {
+      position: fixed;
+      inset-block-start: 0;
+      inset-inline: 0;
+      z-index: 100;
+      background: transparent;
+      transition: background var(--dur) var(--ease),
+                  box-shadow var(--dur) var(--ease),
+                  backdrop-filter var(--dur) var(--ease);
+    }
+    .nav.scrolled {
+      background: rgba(247,247,244,.95);
+      backdrop-filter: blur(8px);
+      box-shadow: 0 1px 0 rgba(28,28,26,.08);
+    }
+    .nav-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 72px;
+      gap: 32px;
+    }
+    .nav-logo {
+      display: block;
+    }
+    .nav-logo-wrap {
+      position: relative;
+      height: 96px;
+      width: 240px;
+      transition: height 400ms var(--ease), width 400ms var(--ease);
+    }
+    .nav.scrolled .nav-logo-wrap {
+      height: 80px;
+      width: 200px;
+    }
+    .nav-logo-hero,
+    .nav-logo-scrolled {
+      position: absolute;
+      top: 0;
+      left: 0;
+      height: 100%;
+      width: auto;
+      transition: opacity 400ms var(--ease),
+                  filter 400ms var(--ease);
+    }
+    .nav-logo-hero {
+      opacity: 1;
+      filter: drop-shadow(0 0 10px rgba(255,255,255,.45))
+              drop-shadow(0 2px 4px rgba(0,0,0,.25));
+    }
+    .nav-logo-scrolled { opacity: 0; }
+    .nav.scrolled .nav-logo-hero { opacity: 0; filter: none; }
+    .nav.scrolled .nav-logo-scrolled { opacity: 1; }
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .nav-links a {
+      font-size: 14px;
+      font-weight: 500;
+      color: var(--white);
+      padding: 6px 14px;
+      border-radius: 999px;
+      transition: color var(--dur), background var(--dur);
+    }
+    .nav-links a.active {
+      color: var(--white);
+      background: rgba(255,255,255,.18);
+    }
+    .nav.scrolled .nav-links a { color: var(--neutral-700); }
+    .nav.scrolled .nav-links a.active {
+      color: var(--green-800);
+      background: var(--green-50);
+    }
+    .nav-links a:hover {
+      background: rgba(255,255,255,.15);
+      color: var(--white);
+    }
+    .nav.scrolled .nav-links a:hover {
+      background: var(--green-50);
+      color: var(--green-800);
+    }
+    .nav-cta { flex-shrink: 0; }
+    .nav-panel {
+      display: flex;
+      align-items: center;
+      gap: 32px;
+    }
+    .nav-toggle {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      cursor: pointer;
+      padding: 6px;
+      background: none;
+      border: none;
+    }
+    .nav-toggle span {
+      display: block;
+      width: 22px;
+      height: 2px;
+      background: var(--white);
+      border-radius: 2px;
+      transition: background var(--dur);
+    }
+    .nav.scrolled .nav-toggle span { background: var(--neutral-800); }
+
+    /* ============================================================
+       PAGE HEADER
+       ============================================================ */
+    .page-header {
+      position: relative;
+      height: 52vh;
+      min-height: 340px;
+      display: flex;
+      align-items: flex-end;
+      padding-bottom: 64px;
+      overflow: hidden;
+    }
+    .page-header-bg {
+      position: absolute;
+      inset: 0;
+      background-image: url("Projectfoto's/510226915_1309700247528115_6538786310940227683_n.jpg");
+      background-size: cover;
+      background-position: center 30%;
+    }
+    .page-header-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(
+        to bottom,
+        rgba(26,46,20,.45) 0%,
+        rgba(26,46,20,.82) 100%
+      );
+    }
+    .page-header-content {
+      position: relative;
+      z-index: 1;
+    }
+    .page-header-label {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+      color: var(--orange-300);
+      margin-bottom: 12px;
+    }
+    .page-header-title {
+      font-family: var(--font-display);
+      font-size: clamp(36px, 6vw, 64px);
+      font-weight: 700;
+      color: var(--white);
+      line-height: 1.1;
+    }
+    .page-header-title em {
+      font-style: italic;
+      color: var(--green-300);
+    }
+    .page-header-sub {
+      margin-top: 16px;
+      font-size: 16px;
+      color: rgba(255,255,255,.75);
+      max-width: 520px;
+      line-height: 1.75;
+      margin-bottom: 28px;
+    }
+    /* Service anchor tabs */
+    .service-tabs {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+    .service-tab {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 13px;
+      font-weight: 500;
+      color: rgba(255,255,255,.7);
+      background: rgba(255,255,255,.08);
+      border: 1px solid rgba(255,255,255,.14);
+      border-radius: 999px;
+      padding: 8px 18px;
+      transition: background var(--dur), color var(--dur), border-color var(--dur);
+    }
+    .service-tab:hover {
+      background: rgba(255,255,255,.16);
+      color: var(--white);
+      border-color: rgba(255,255,255,.28);
+    }
+    .service-tab-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+
+    /* ============================================================
+       SERVICE SECTIONS — SHARED
+       ============================================================ */
+    .service-section {
+      padding: 112px 0;
+      border-bottom: 1px solid var(--neutral-100);
+    }
+    .service-section:last-of-type {
+      border-bottom: none;
+    }
+    .service-inner {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: start;
+    }
+    .service-inner.reverse {
+      direction: rtl;
+    }
+    .service-inner.reverse > * {
+      direction: ltr;
+    }
+
+    /* Visual side */
+    .service-visual {
+      position: sticky;
+      top: 104px;
+    }
+    .service-image-wrap {
+      position: relative;
+      border-radius: var(--r-xl);
+      overflow: hidden;
+      aspect-ratio: 4/3;
+    }
+    .service-image-placeholder {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    /* Decorative number accent behind visual */
+    .service-number-bg {
+      position: absolute;
+      bottom: -20px;
+      right: -16px;
+      font-family: var(--font-display);
+      font-size: 200px;
+      font-weight: 700;
+      line-height: 1;
+      color: transparent;
+      -webkit-text-stroke: 1.5px var(--green-200);
+      pointer-events: none;
+      z-index: -1;
+      user-select: none;
+    }
+    .service-badge {
+      position: absolute;
+      top: 20px;
+      left: 20px;
+      background: var(--white);
+      border-radius: var(--r-lg);
+      padding: 12px 16px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      box-shadow: var(--shadow-md);
+    }
+    .service-badge-icon {
+      width: 36px;
+      height: 36px;
+      background: var(--green-50);
+      border-radius: var(--r-md);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--green-700);
+      flex-shrink: 0;
+    }
+    .service-badge-text {
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--neutral-700);
+      line-height: 1.3;
+    }
+    .service-badge-sub {
+      font-size: 11px;
+      font-weight: 400;
+      color: var(--neutral-500);
+    }
+
+    /* Content side */
+    .service-content {}
+    .service-number {
+      font-family: var(--font-display);
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--orange-500);
+      letter-spacing: .1em;
+      margin-bottom: 16px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .service-number::after {
+      content: '';
+      display: block;
+      width: 40px;
+      height: 1px;
+      background: var(--orange-300);
+    }
+    .service-title {
+      font-family: var(--font-display);
+      font-size: clamp(26px, 3.5vw, 38px);
+      font-weight: 700;
+      color: var(--green-900);
+      line-height: 1.15;
+      margin-bottom: 20px;
+    }
+    .service-desc {
+      font-size: 15px;
+      color: var(--neutral-600);
+      line-height: 1.8;
+      margin-bottom: 32px;
+    }
+    .service-desc p + p {
+      margin-top: 14px;
+    }
+    .service-features {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px 24px;
+      margin-bottom: 40px;
+    }
+    .feature-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      font-size: 13.5px;
+      color: var(--neutral-700);
+      line-height: 1.5;
+    }
+    .feature-check {
+      width: 18px;
+      height: 18px;
+      background: var(--green-100);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      margin-top: 1px;
+      color: var(--green-700);
+    }
+    .service-cta {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+    .service-cta-link {
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--green-700);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      transition: color var(--dur), gap var(--dur);
+    }
+    .service-cta-link:hover {
+      color: var(--green-900);
+      gap: 10px;
+    }
+
+    /* ============================================================
+       TUINONTWERP — specific visual
+       ============================================================ */
+    #ontwerp .service-image-placeholder {
+      background: linear-gradient(135deg, var(--green-800) 0%, var(--green-600) 60%, var(--green-400) 100%);
+    }
+    #ontwerp .service-image-placeholder svg {
+      opacity: .18;
+      color: var(--white);
+    }
+
+    /* ============================================================
+       TUINAANLEG — specific visual
+       ============================================================ */
+    #aanleg .service-image-placeholder {
+      background: linear-gradient(135deg, #2A3D1E 0%, var(--green-700) 55%, var(--green-500) 100%);
+    }
+    #aanleg .service-image-placeholder svg {
+      opacity: .18;
+      color: var(--white);
+    }
+
+    /* ============================================================
+       TUINONDERHOUD — specific visual
+       ============================================================ */
+    #onderhoud .service-image-placeholder {
+      background: linear-gradient(135deg, var(--green-900) 0%, var(--green-800) 55%, var(--green-600) 100%);
+    }
+    #onderhoud .service-image-placeholder svg {
+      opacity: .18;
+      color: var(--white);
+    }
+
+    /* ============================================================
+       WERKWIJZE
+       ============================================================ */
+    .werkwijze {
+      padding: 112px 0;
+      background: var(--green-900);
+      position: relative;
+      overflow: hidden;
+    }
+    .werkwijze::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse at 60% 100%, rgba(94,146,71,.20) 0%, transparent 55%);
+      pointer-events: none;
+    }
+    .werkwijze-header {
+      text-align: center;
+      margin-bottom: 72px;
+    }
+    .werkwijze .label { color: var(--green-400); }
+    .werkwijze .section-title {
+      color: var(--white);
+      margin-inline: auto;
+    }
+    .werkwijze .section-intro {
+      color: rgba(255,255,255,.62);
+      margin-inline: auto;
+      text-align: center;
+    }
+    /* Horizontal connector line */
+    .steps-track {
+      position: relative;
+    }
+    .steps-track::before {
+      content: '';
+      position: absolute;
+      top: 28px;
+      left: calc(25% - 4px);
+      width: calc(50% + 8px);
+      height: 1px;
+      background: linear-gradient(90deg,
+        transparent 0%,
+        rgba(164,201,140,.35) 15%,
+        rgba(164,201,140,.35) 85%,
+        transparent 100%);
+    }
+    .steps-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 0;
+    }
+    .step {
+      padding: 0 24px;
+      text-align: center;
+      position: relative;
+    }
+    .step-number-wrap {
+      width: 56px;
+      height: 56px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 24px;
+      position: relative;
+      z-index: 1;
+    }
+    .step-number-wrap.step-active {
+      background: var(--orange-500);
+      box-shadow: 0 0 0 8px rgba(200,88,31,.18);
+    }
+    .step-number-wrap.step-passive {
+      background: rgba(255,255,255,.08);
+      border: 1px solid rgba(255,255,255,.15);
+    }
+    .step-num {
+      font-family: var(--font-display);
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--white);
+    }
+    .step-title {
+      font-family: var(--font-display);
+      font-size: 16px;
+      font-weight: 600;
+      color: var(--white);
+      margin-bottom: 10px;
+      line-height: 1.3;
+    }
+    .step-desc {
+      font-size: 13px;
+      color: rgba(255,255,255,.58);
+      line-height: 1.7;
+    }
+
+    /* ============================================================
+       CTA BAND
+       ============================================================ */
+    .cta-band {
+      padding: 96px 0;
+      background: var(--neutral-50);
+      border-top: 1px solid var(--neutral-100);
+    }
+    .cta-band-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 48px;
+      flex-wrap: wrap;
+    }
+    .cta-band-copy .label { margin-bottom: 8px; }
+    .cta-band-title {
+      font-family: var(--font-display);
+      font-size: clamp(24px, 3.5vw, 36px);
+      font-weight: 700;
+      color: var(--green-900);
+      line-height: 1.2;
+      margin-bottom: 12px;
+    }
+    .cta-band-title em {
+      font-style: italic;
+      color: var(--green-600);
+    }
+    .cta-band-sub {
+      font-size: 15px;
+      color: var(--neutral-600);
+      max-width: 420px;
+      line-height: 1.7;
+    }
+    .cta-band-actions {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      flex-shrink: 0;
+      flex-wrap: wrap;
+    }
+    .cta-tel {
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--green-700);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      transition: color var(--dur);
+    }
+    .cta-tel:hover { color: var(--green-900); }
+    .cta-tel-icon {
+      width: 36px;
+      height: 36px;
+      background: var(--green-100);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--green-700);
+    }
+
+    /* ============================================================
+       FOOTER
+       ============================================================ */
+    .footer {
+      background: var(--green-900);
+      padding: 56px 0 40px;
+    }
+    .footer-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+      flex-wrap: wrap;
+    }
+    .footer-logo img {
+      height: 92px;
+      width: auto;
+      display: block;
+    }
+    .footer-copy {
+      font-size: 13px;
+      color: rgba(255,255,255,.65);
+      text-align: center;
+    }
+    .footer-links {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+    .footer-links a {
+      font-size: 13px;
+      font-weight: 500;
+      color: rgba(255,255,255,.65);
+      transition: color var(--dur);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .footer-links a:hover { color: var(--white); }
+    .footer-fb {
+      border: 1px solid rgba(255,255,255,.2);
+      border-radius: 999px;
+      padding: 7px 16px;
+      gap: 7px;
+    }
+    .footer-fb:hover {
+      border-color: rgba(255,255,255,.5);
+    }
+
+    /* ============================================================
+       MOBILE RESPONSIVE
+       ============================================================ */
+    @media (max-width: 960px) {
+      .service-inner,
+      .service-inner.reverse {
+        grid-template-columns: 1fr;
+        direction: ltr;
+        gap: 48px;
+      }
+      .service-visual {
+        position: static;
+        order: -1;
+      }
+      .service-image-wrap {
+        aspect-ratio: 16/9;
+      }
+      .service-number-bg { display: none; }
+      .steps-grid {
+        grid-template-columns: 1fr 1fr;
+        gap: 48px 0;
+      }
+      .steps-track::before { display: none; }
+      .service-features {
+        grid-template-columns: 1fr;
+      }
+    }
+    @media (max-width: 700px) {
+      .container { padding-inline: 20px; }
+      .service-section { padding: 72px 0; }
+      .werkwijze { padding: 72px 0; }
+      .cta-band { padding: 72px 0; }
+      .steps-grid {
+        grid-template-columns: 1fr;
+        gap: 40px;
+      }
+      .cta-band-inner {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+      .nav-panel { display: none; }
+      .nav-toggle { display: flex; }
+      .nav.nav-mobile-open .nav-panel {
+        display: flex;
+        flex-direction: column;
+        position: fixed;
+        inset: 72px 0 0;
+        background: rgba(247,247,244,.98);
+        backdrop-filter: blur(12px);
+        align-items: flex-start;
+        padding: 32px 24px;
+        gap: 8px;
+        box-shadow: 0 8px 32px rgba(28,28,26,.12);
+      }
+      .nav.nav-mobile-open .nav-links {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 4px;
+        width: 100%;
+      }
+      .nav.nav-mobile-open .nav-links a {
+        color: var(--neutral-700);
+        font-size: 18px;
+        padding: 10px 16px;
+        width: 100%;
+        border-radius: var(--r-lg);
+      }
+      .nav.nav-mobile-open .nav-links a:hover {
+        background: var(--green-50);
+        color: var(--green-800);
+      }
+      .nav.nav-mobile-open .nav-cta {
+        margin-top: 16px;
+        width: 100%;
+        justify-content: center;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ============================================================
+       NAV
+       ============================================================ -->
+  <nav class="nav" id="nav">
+    <div class="container">
+      <div class="nav-inner">
+
+        <a href="index.html" class="nav-logo">
+          <div class="nav-logo-wrap">
+            <img class="nav-logo-hero" src="Logo v5.png" alt="Tuinen Janssens">
+            <img class="nav-logo-scrolled" src="Logo verticaal v4.png" alt="Tuinen Janssens">
+          </div>
+        </a>
+
+        <div class="nav-panel">
+          <ul class="nav-links">
+            <li><a href="diensten.html" class="active">Diensten</a></li>
+            <li><a href="realisaties.html">Realisaties</a></li>
+            <li><a href="index.html#over-ons">Over ons</a></li>
+            <li><a href="index.html#contact">Contact</a></li>
+          </ul>
+          <a href="index.html#contact" class="btn btn-primary nav-cta">Offerte aanvragen</a>
+        </div>
+
+        <button class="nav-toggle" id="navToggle" aria-label="Menu openen">
+          <span></span><span></span><span></span>
+        </button>
+
+      </div>
+    </div>
+  </nav>
+
+  <!-- ============================================================
+       PAGE HEADER
+       ============================================================ -->
+  <header class="page-header">
+    <div class="page-header-bg"></div>
+    <div class="page-header-overlay"></div>
+    <div class="container">
+      <div class="page-header-content">
+        <p class="page-header-label">Onze diensten</p>
+        <h1 class="page-header-title">Tuinen van <em>A tot Z</em></h1>
+        <p class="page-header-sub">Bram Janssens begeleidt uw tuinproject van het eerste gesprek tot de laatste afwerking. Tuinontwerp, aanleg en onderhoud — alles in eigen handen.</p>
+        <div class="service-tabs">
+          <a href="#ontwerp" class="service-tab">
+            <span class="service-tab-dot" style="background: var(--green-400);"></span>
+            Tuinontwerp
+          </a>
+          <a href="#aanleg" class="service-tab">
+            <span class="service-tab-dot" style="background: var(--orange-400);"></span>
+            Tuinaanleg
+          </a>
+          <a href="#onderhoud" class="service-tab">
+            <span class="service-tab-dot" style="background: var(--green-300);"></span>
+            Tuinonderhoud
+          </a>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- ============================================================
+       TUINONTWERP
+       ============================================================ -->
+  <section class="service-section" id="ontwerp">
+    <div class="container">
+      <div class="service-inner">
+
+        <!-- Visual -->
+        <div class="service-visual reveal">
+          <div style="position:relative;">
+            <div class="service-image-wrap">
+              <div class="service-image-placeholder">
+                <!-- Decorative botanical SVG -->
+                <svg width="280" height="280" viewBox="0 0 280 280" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M140 240 C140 240 60 180 60 120 C60 80 96 48 140 48 C184 48 220 80 220 120 C220 180 140 240 140 240Z" stroke="currentColor" stroke-width="2" fill="none"/>
+                  <path d="M140 240 L140 100" stroke="currentColor" stroke-width="1.5"/>
+                  <path d="M140 180 C140 180 100 160 80 130" stroke="currentColor" stroke-width="1.5" stroke-dasharray="4 4"/>
+                  <path d="M140 180 C140 180 180 160 200 130" stroke="currentColor" stroke-width="1.5" stroke-dasharray="4 4"/>
+                  <path d="M140 148 C140 148 108 132 92 108" stroke="currentColor" stroke-width="1.5" stroke-dasharray="4 4"/>
+                  <path d="M140 148 C140 148 172 132 188 108" stroke="currentColor" stroke-width="1.5" stroke-dasharray="4 4"/>
+                  <circle cx="140" cy="240" r="6" fill="currentColor" opacity=".5"/>
+                  <circle cx="140" cy="48" r="6" fill="currentColor" opacity=".5"/>
+                </svg>
+              </div>
+
+              <!-- Badge overlay -->
+              <div class="service-badge">
+                <div class="service-badge-icon">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M12 2L2 7l10 5 10-5-10-5z"/>
+                    <path d="M2 17l10 5 10-5"/>
+                    <path d="M2 12l10 5 10-5"/>
+                  </svg>
+                </div>
+                <div>
+                  <div class="service-badge-text">Op maat van uw wensen</div>
+                  <div class="service-badge-sub">Van schets tot definitief plan</div>
+                </div>
+              </div>
+            </div>
+            <span class="service-number-bg">01</span>
+          </div>
+        </div>
+
+        <!-- Content -->
+        <div class="service-content">
+          <p class="service-number reveal">01</p>
+          <h2 class="service-title reveal reveal-delay-1">Tuinontwerp</h2>
+          <div class="service-desc reveal reveal-delay-2">
+            <p>
+              Een mooie tuin begint met een doordacht plan. Bram luistert naar uw wensen,
+              bestudeert de omgeving en vertaalt dit naar een tijdloos, persoonlijk ontwerp
+              dat past bij uw huis, levensstijl en budget.
+            </p>
+            <p>
+              Of u nu droomt van een landelijke tuin met wilde bloemen, een strakke
+              moderne buitenruimte of een speelse familietuin: elk ontwerp krijgt een
+              sterk concept als basis en creatieve oplossingen op maat.
+            </p>
+          </div>
+
+          <ul class="service-features reveal reveal-delay-3">
+            <li class="feature-item">
+              <span class="feature-check">
+                <svg width="10" height="10" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="2 6 5 9 10 3"/></svg>
+              </span>
+              Tijdloze en hedendaagse tuinen
+            </li>
+            <li class="feature-item">
+              <span class="feature-check">
+                <svg width="10" height="10" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="2 6 5 9 10 3"/></svg>
+              </span>
+              Klassieke landschapstuinen
+            </li>
+            <li class="feature-item">
+              <span class="feature-check">
+                <svg width="10" height="10" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="2 6 5 9 10 3"/></svg>
+              </span>
+              Kleine stadstuintjes
+            </li>
+            <li class="feature-item">
+              <span class="feature-check">
+                <svg width="10" height="10" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="2 6 5 9 10 3"/></svg>
+              </span>
+              Renovaties bestaande tuinen
+            </li>
+            <li class="feature-item">
+              <span class="feature-check">
+                <svg width="10" height="10" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="2 6 5 9 10 3"/></svg>
+              </span>
+              Beplantingsplannen op maat
+            </li>
+            <li class="feature-item">
+              <span class="feature-check">
+                <svg width="10" height="10" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="2 6 5 9 10 3"/></svg>
+              </span>
+              Creatieve oplossingen op maat
+            </li>
+          </ul>
+
+          <div class="service-cta reveal reveal-delay-4">
+            <a href="index.html#contact" class="btn btn-primary">Offerte aanvragen</a>
+            <a href="#aanleg" class="service-cta-link">
+              Meer over tuinaanleg
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+            </a>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       TUINAANLEG
+       ============================================================ -->
+  <section class="service-section" id="aanleg" style="background: var(--white);">
+    <div class="container">
+      <div class="service-inner reverse">
+
+        <!-- Visual -->
+        <div class="service-visual reveal">
+          <div style="position:relative;">
+            <div class="service-image-wrap">
+              <div class="service-image-placeholder">
+                <svg width="280" height="280" viewBox="0 0 280 280" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <!-- Shovel / construction icon, stylized -->
+                  <rect x="60" y="180" width="160" height="14" rx="7" stroke="currentColor" stroke-width="2" fill="none"/>
+                  <rect x="80" y="150" width="120" height="14" rx="4" stroke="currentColor" stroke-width="2" fill="none"/>
+                  <rect x="100" y="120" width="80" height="14" rx="4" stroke="currentColor" stroke-width="2" fill="none"/>
+                  <path d="M140 60 L140 120" stroke="currentColor" stroke-width="2"/>
+                  <circle cx="140" cy="50" r="12" stroke="currentColor" stroke-width="2" fill="none"/>
+                  <path d="M110 210 L100 240 M170 210 L180 240" stroke="currentColor" stroke-width="1.5" stroke-dasharray="3 3"/>
+                </svg>
+              </div>
+
+              <div class="service-badge">
+                <div class="service-badge-icon">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M3 21h18"/>
+                    <path d="M5 21V7l7-4 7 4v14"/>
+                    <path d="M9 21v-6h6v6"/>
+                  </svg>
+                </div>
+                <div>
+                  <div class="service-badge-text">Van A tot Z gerealiseerd</div>
+                  <div class="service-badge-sub">Grondwerk tot oplevering</div>
+                </div>
+              </div>
+            </div>
+            <span class="service-number-bg">02</span>
+          </div>
+        </div>
+
+        <!-- Content -->
+        <div class="service-content">
+          <p class="service-number reveal">02</p>
+          <h2 class="service-title reveal reveal-delay-1">Tuinaanleg</h2>
+          <div class="service-desc reveal reveal-delay-2">
+            <p>
+              Na het ontwerp volgt de uitvoering. Bram neemt de volledige realisatie
+              op zich: van de grondwerken en rioleringsaanpassingen tot de plaatsing
+              van verhardingen, beplanting en gazonzaai.
+            </p>
+            <p>
+              Elk project wordt uitgevoerd met oog voor kwaliteit en duurzaamheid.
+              Sterke concepten als basis, afgewerkt tot in het kleinste detail.
+              U ontvangt een tuin die niet alleen mooi oogt, maar ook praktisch en
+              onderhoudsvriendelijk is.
+            </p>
+          </div>
+
+          <ul class="service-features reveal reveal-delay-3">
+            <li class="feature-item">
+              <span class="feature-check">
+                <svg width="10" height="10" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="2 6 5 9 10 3"/></svg>
+              </span>
+              Grondwerken en nivellering
+            </li>
+            <li class="feature-item">
+              <span class="feature-check">
+                <svg width="10" height="10" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="2 6 5 9 10 3"/></svg>
+              </span>
+              Terrassen en verhardingen
+            </li>
+            <li class="feature-item">
+              <span class="feature-check">
+                <svg width="10" height="10" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="2 6 5 9 10 3"/></svg>
+              </span>
+              Beplanting en struiken
+            </li>
+            <li class="feature-item">
+              <span class="feature-check">
+                <svg width="10" height="10" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="2 6 5 9 10 3"/></svg>
+              </span>
+              Gazonaanleg en -zaai
+            </li>
+            <li class="feature-item">
+              <span class="feature-check">
+                <svg width="10" height="10" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="2 6 5 9 10 3"/></svg>
+              </span>
+              Vijvers en waterpartijen
+            </li>
+            <li class="feature-item">
+              <span class="feature-check">
+                <svg width="10" height="10" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="2 6 5 9 10 3"/></svg>
+              </span>
+              Tuinverlichting en irrigatie
+            </li>
+          </ul>
+
+          <div class="service-cta reveal reveal-delay-4">
+            <a href="index.html#contact" class="btn btn-primary">Offerte aanvragen</a>
+            <a href="#onderhoud" class="service-cta-link">
+              Meer over tuinonderhoud
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+            </a>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       TUINONDERHOUD
+       ============================================================ -->
+  <section class="service-section" id="onderhoud">
+    <div class="container">
+      <div class="service-inner">
+
+        <!-- Visual -->
+        <div class="service-visual reveal">
+          <div style="position:relative;">
+            <div class="service-image-wrap">
+              <div class="service-image-placeholder">
+                <svg width="280" height="280" viewBox="0 0 280 280" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <!-- Stylized scissors / shears shape -->
+                  <circle cx="100" cy="100" r="24" stroke="currentColor" stroke-width="2" fill="none"/>
+                  <circle cx="180" cy="100" r="24" stroke="currentColor" stroke-width="2" fill="none"/>
+                  <path d="M116 112 L164 168 M164 112 L116 168" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                  <path d="M116 168 L100 220" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                  <path d="M164 168 L180 220" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                  <circle cx="100" cy="100" r="8" fill="currentColor" opacity=".4"/>
+                  <circle cx="180" cy="100" r="8" fill="currentColor" opacity=".4"/>
+                </svg>
+              </div>
+
+              <div class="service-badge">
+                <div class="service-badge-icon">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M17 3a2.828 2.828 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5L17 3z"/>
+                  </svg>
+                </div>
+                <div>
+                  <div class="service-badge-text">Het hele jaar door</div>
+                  <div class="service-badge-sub">Periodieke onderhoudscontracten</div>
+                </div>
+              </div>
+            </div>
+            <span class="service-number-bg">03</span>
+          </div>
+        </div>
+
+        <!-- Content -->
+        <div class="service-content">
+          <p class="service-number reveal">03</p>
+          <h2 class="service-title reveal reveal-delay-1">Tuinonderhoud</h2>
+          <div class="service-desc reveal reveal-delay-2">
+            <p>
+              Een tuin is nooit klaar. Met regelmatig onderhoud blijft uw groene buitenruimte
+              het hele jaar door in perfecte staat. Bram zorgt voor professionele snoeiwerken,
+              gazononderhoud en seizoensgebonden verzorging.
+            </p>
+            <p>
+              Via een onderhoudscontract op maat wordt uw tuin periodiek bezocht en bijgehouden.
+              Zo hoeft u zich nergens zorgen over te maken en geniet u het hele seizoen van
+              een verzorgde tuin.
+            </p>
+          </div>
+
+          <ul class="service-features reveal reveal-delay-3">
+            <li class="feature-item">
+              <span class="feature-check">
+                <svg width="10" height="10" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="2 6 5 9 10 3"/></svg>
+              </span>
+              Snoeiwerken: hagen en struiken
+            </li>
+            <li class="feature-item">
+              <span class="feature-check">
+                <svg width="10" height="10" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="2 6 5 9 10 3"/></svg>
+              </span>
+              Snoei van grote en kleine bomen
+            </li>
+            <li class="feature-item">
+              <span class="feature-check">
+                <svg width="10" height="10" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="2 6 5 9 10 3"/></svg>
+              </span>
+              Gazononderhoud en maaien
+            </li>
+            <li class="feature-item">
+              <span class="feature-check">
+                <svg width="10" height="10" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="2 6 5 9 10 3"/></svg>
+              </span>
+              Onderhoud van borders
+            </li>
+            <li class="feature-item">
+              <span class="feature-check">
+                <svg width="10" height="10" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="2 6 5 9 10 3"/></svg>
+              </span>
+              Vernieuwen van gazons
+            </li>
+            <li class="feature-item">
+              <span class="feature-check">
+                <svg width="10" height="10" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="2 6 5 9 10 3"/></svg>
+              </span>
+              Seizoensgebonden onderhoud
+            </li>
+          </ul>
+
+          <div class="service-cta reveal reveal-delay-4">
+            <a href="index.html#contact" class="btn btn-primary">Offerte aanvragen</a>
+            <a href="#werkwijze" class="service-cta-link">
+              Onze werkwijze bekijken
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+            </a>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       WERKWIJZE
+       ============================================================ -->
+  <section class="werkwijze" id="werkwijze">
+    <div class="container">
+
+      <div class="werkwijze-header reveal">
+        <p class="label">Hoe werken wij</p>
+        <h2 class="section-title">Uw tuin, stap voor stap</h2>
+        <p class="section-intro">
+          Van het eerste contactmoment tot de oplevering begeleiden we elk project
+          persoonlijk en transparant.
+        </p>
+      </div>
+
+      <div class="steps-track">
+        <div class="steps-grid">
+
+          <div class="step reveal">
+            <div class="step-number-wrap step-active">
+              <span class="step-num">1</span>
+            </div>
+            <h3 class="step-title">Vrijblijvend<br>gesprek</h3>
+            <p class="step-desc">
+              We bespreken uw wensen, bezoeken de locatie en luisteren naar uw
+              ideeën. Geen verplichtingen.
+            </p>
+          </div>
+
+          <div class="step reveal reveal-delay-1">
+            <div class="step-number-wrap step-passive">
+              <span class="step-num">2</span>
+            </div>
+            <h3 class="step-title">Ontwerp &amp;<br>voorstel</h3>
+            <p class="step-desc">
+              Op basis van het gesprek maken we een concreet tuinontwerp en een
+              duidelijke offerte.
+            </p>
+          </div>
+
+          <div class="step reveal reveal-delay-2">
+            <div class="step-number-wrap step-passive">
+              <span class="step-num">3</span>
+            </div>
+            <h3 class="step-title">Aanleg of<br>onderhoud</h3>
+            <p class="step-desc">
+              Na uw goedkeuring gaan we aan de slag. We houden u op de hoogte
+              van de voortgang.
+            </p>
+          </div>
+
+          <div class="step reveal reveal-delay-3">
+            <div class="step-number-wrap step-passive">
+              <span class="step-num">4</span>
+            </div>
+            <h3 class="step-title">Oplevering &amp;<br>nazorg</h3>
+            <p class="step-desc">
+              We leveren de tuin op, geven tips voor het gebruik en blijven
+              beschikbaar voor vragen.
+            </p>
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ============================================================
+       CTA BAND
+       ============================================================ -->
+  <section class="cta-band">
+    <div class="container">
+      <div class="cta-band-inner">
+
+        <div class="cta-band-copy reveal">
+          <p class="label">Klaar om te starten?</p>
+          <h2 class="cta-band-title">Vraag een <em>vrijblijvende</em><br>offerte aan</h2>
+          <p class="cta-band-sub">
+            Neem contact op en we bespreken uw tuinwensen persoonlijk.
+            Actief in Harelbeke en de ruimere omgeving.
+          </p>
+        </div>
+
+        <div class="cta-band-actions reveal reveal-delay-2">
+          <a href="index.html#contact" class="btn btn-primary">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+            Stuur een bericht
+          </a>
+          <a href="tel:+32472024162" class="cta-tel">
+            <span class="cta-tel-icon">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.61 3.4 2 2 0 0 1 3.6 1.22h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L7.91 8.9a16 16 0 0 0 6 6l.92-.92a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 21.73 16.92Z"/></svg>
+            </span>
+            +32 (0) 472 02 41 62
+          </a>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       FOOTER
+       ============================================================ -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-inner">
+
+        <a href="index.html" class="footer-logo">
+          <img src="Logo v5.png" alt="Tuinen Janssens">
+        </a>
+
+        <p class="footer-copy">
+          &copy; 2026 Tuinen Janssens &middot; Bram Janssens<br>
+          Veldstraat 4, 8530 Harelbeke
+        </p>
+
+        <div class="footer-links">
+          <a href="https://www.facebook.com/p/Tuinen-Janssens-100054644550594/" target="_blank" rel="noopener" class="footer-fb">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/>
+            </svg>
+            Facebook
+          </a>
+        </div>
+
+      </div>
+    </div>
+  </footer>
+
+  <!-- ============================================================
+       JAVASCRIPT
+       ============================================================ -->
+  <script>
+    const nav = document.getElementById('nav');
+    window.addEventListener('scroll', () => {
+      nav.classList.toggle('scrolled', window.scrollY > 40);
+    }, { passive: true });
+
+    // Scroll reveal
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          e.target.classList.add('visible');
+          observer.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.10, rootMargin: '0px 0px -32px 0px' });
+
+    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+    // Mobile nav toggle
+    document.getElementById('navToggle').addEventListener('click', () => {
+      nav.classList.toggle('nav-mobile-open');
+    });
+
+    document.querySelectorAll('.nav-panel a').forEach(link => {
+      link.addEventListener('click', () => nav.classList.remove('nav-mobile-open'));
+    });
+  </script>
+
+</body>
+</html>

@@ -1,0 +1,794 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Realisaties — Tuinen Janssens uit Harelbeke</title>
+  <meta name="description" content="Bekijk de tuinprojecten van Tuinen Janssens. Van tuinontwerp tot tuinaanleg en onderhoud in Harelbeke en omgeving.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <style>
+    /* ============================================================
+       TOKENS
+       ============================================================ */
+    :root {
+      --green-900: #1A2E14;
+      --green-800: #2D4A22;
+      --green-700: #3D6130;
+      --green-600: #4E7A3C;
+      --green-500: #5E9247;
+      --green-400: #7CAF62;
+      --green-300: #A4C98C;
+      --green-200: #C8DFB6;
+      --green-100: #E6F2DA;
+      --green-50:  #F3F9EE;
+
+      --orange-700: #9E4318;
+      --orange-600: #B84F1C;
+      --orange-500: #C8581F;
+      --orange-400: #D96B30;
+      --orange-300: #E88F5E;
+      --orange-100: #FAD9C3;
+      --orange-50:  #FDF0E8;
+
+      --neutral-900: #1C1C1A;
+      --neutral-800: #2E2D2A;
+      --neutral-700: #474540;
+      --neutral-600: #605E58;
+      --neutral-500: #7A7870;
+      --neutral-400: #9A9890;
+      --neutral-300: #BBBAB3;
+      --neutral-200: #D5D4CC;
+      --neutral-100: #EDECE8;
+      --neutral-50:  #F7F7F4;
+      --white: #FFFFFF;
+
+      --font-display: 'Playfair Display', Georgia, serif;
+      --font-body:    'DM Sans', system-ui, sans-serif;
+
+      --r-sm:  4px;
+      --r-md:  8px;
+      --r-lg:  16px;
+      --r-xl:  24px;
+      --r-2xl: 32px;
+
+      --shadow-sm: 0 1px 3px rgba(28,28,26,.08), 0 1px 2px rgba(28,28,26,.04);
+      --shadow-md: 0 4px 12px rgba(28,28,26,.10), 0 2px 4px rgba(28,28,26,.06);
+      --shadow-lg: 0 12px 32px rgba(28,28,26,.12), 0 4px 8px rgba(28,28,26,.06);
+
+      --ease: cubic-bezier(0.16, 1, 0.3, 1);
+      --dur:  300ms;
+    }
+
+    /* ============================================================
+       RESET & BASE
+       ============================================================ */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; font-size: 16px; }
+    body {
+      font-family: var(--font-body);
+      background: var(--neutral-50);
+      color: var(--neutral-800);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+    img { display: block; max-width: 100%; }
+    a { color: inherit; text-decoration: none; }
+    ul { list-style: none; }
+
+    /* ============================================================
+       UTILITIES
+       ============================================================ */
+    .container {
+      max-width: 1160px;
+      margin-inline: auto;
+      padding-inline: 32px;
+    }
+    .label {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+      color: var(--orange-500);
+    }
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-family: var(--font-body);
+      font-size: 14px;
+      font-weight: 600;
+      border-radius: 999px;
+      padding: 12px 28px;
+      cursor: pointer;
+      border: 2px solid transparent;
+      transition: background var(--dur) var(--ease),
+                  color var(--dur) var(--ease),
+                  border-color var(--dur) var(--ease),
+                  box-shadow var(--dur) var(--ease),
+                  transform 150ms var(--ease);
+      white-space: nowrap;
+    }
+    .btn:hover { transform: translateY(-1px); }
+    .btn:active { transform: translateY(0); }
+    .btn-primary {
+      background: var(--orange-500);
+      color: var(--white);
+      box-shadow: 0 4px 16px rgba(200,88,31,.30);
+    }
+    .btn-primary:hover {
+      background: var(--orange-400);
+      box-shadow: 0 6px 24px rgba(200,88,31,.40);
+    }
+    .btn-ghost-light {
+      background: transparent;
+      color: var(--white);
+      border-color: rgba(255,255,255,.5);
+    }
+    .btn-ghost-light:hover {
+      background: rgba(255,255,255,.12);
+      border-color: rgba(255,255,255,.8);
+    }
+
+    /* Fade-in on scroll */
+    .reveal {
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity 0.65s var(--ease), transform 0.65s var(--ease);
+    }
+    .reveal.visible {
+      opacity: 1;
+      transform: none;
+    }
+    .reveal-delay-1 { transition-delay: 100ms; }
+    .reveal-delay-2 { transition-delay: 200ms; }
+    .reveal-delay-3 { transition-delay: 300ms; }
+
+    /* ============================================================
+       NAV
+       ============================================================ */
+    .nav {
+      position: fixed;
+      inset-block-start: 0;
+      inset-inline: 0;
+      z-index: 100;
+      background: transparent;
+      transition: background var(--dur) var(--ease),
+                  box-shadow var(--dur) var(--ease),
+                  backdrop-filter var(--dur) var(--ease);
+    }
+    .nav.scrolled {
+      background: rgba(247,247,244,.95);
+      backdrop-filter: blur(8px);
+      box-shadow: 0 1px 0 rgba(28,28,26,.08);
+    }
+    .nav-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 72px;
+      gap: 32px;
+    }
+    .nav-logo {
+      display: block;
+    }
+    .nav-logo-hero,
+    .nav-logo-scrolled {
+      position: absolute;
+      top: 0;
+      left: 0;
+      height: 100%;
+      width: auto;
+      transition: opacity 400ms var(--ease),
+                  filter 400ms var(--ease);
+    }
+    .nav-logo-wrap {
+      position: relative;
+      height: 96px;
+      width: 240px;
+      transition: height 400ms var(--ease), width 400ms var(--ease);
+    }
+    .nav.scrolled .nav-logo-wrap {
+      height: 80px;
+      width: 200px;
+    }
+    .nav-logo-hero {
+      opacity: 1;
+      filter: drop-shadow(0 0 10px rgba(255,255,255,.45))
+              drop-shadow(0 2px 4px rgba(0,0,0,.25));
+    }
+    .nav-logo-scrolled {
+      opacity: 0;
+    }
+    .nav.scrolled .nav-logo-hero {
+      opacity: 0;
+      filter: none;
+    }
+    .nav.scrolled .nav-logo-scrolled {
+      opacity: 1;
+    }
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .nav-links a {
+      font-size: 14px;
+      font-weight: 500;
+      color: var(--white);
+      padding: 6px 14px;
+      border-radius: 999px;
+      transition: color var(--dur), background var(--dur);
+    }
+    .nav-links a.active {
+      color: var(--white);
+      background: rgba(255,255,255,.15);
+    }
+    .nav.scrolled .nav-links a { color: var(--neutral-700); }
+    .nav.scrolled .nav-links a.active {
+      color: var(--green-800);
+      background: var(--green-50);
+    }
+    .nav-links a:hover {
+      background: rgba(255,255,255,.15);
+      color: var(--white);
+    }
+    .nav.scrolled .nav-links a:hover {
+      background: var(--green-50);
+      color: var(--green-800);
+    }
+    .nav-cta { flex-shrink: 0; }
+    .nav-panel {
+      display: flex;
+      align-items: center;
+      gap: 32px;
+    }
+    .nav-toggle {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      cursor: pointer;
+      padding: 6px;
+      background: none;
+      border: none;
+    }
+    .nav-toggle span {
+      display: block;
+      width: 22px;
+      height: 2px;
+      background: var(--white);
+      border-radius: 2px;
+      transition: background var(--dur);
+    }
+    .nav.scrolled .nav-toggle span { background: var(--neutral-800); }
+
+    /* ============================================================
+       PAGE HEADER
+       ============================================================ */
+    .page-header {
+      position: relative;
+      height: 52vh;
+      min-height: 340px;
+      display: flex;
+      align-items: flex-end;
+      padding-bottom: 64px;
+      overflow: hidden;
+    }
+    .page-header-bg {
+      position: absolute;
+      inset: 0;
+      background-image: url('509230108_1308454614319345_1566048337373865804_n.jpg');
+      background-size: cover;
+      background-position: center 30%;
+    }
+    .page-header-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(
+        160deg,
+        rgba(26,46,20,.78) 0%,
+        rgba(26,46,20,.60) 50%,
+        rgba(26,46,20,.82) 100%
+      );
+    }
+    .page-header-content {
+      position: relative;
+      z-index: 1;
+    }
+    .page-header-label {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+      color: var(--orange-300);
+      margin-bottom: 12px;
+    }
+    .page-header-title {
+      font-family: var(--font-display);
+      font-size: clamp(36px, 6vw, 64px);
+      font-weight: 700;
+      color: var(--white);
+      line-height: 1.1;
+    }
+    .page-header-sub {
+      margin-top: 16px;
+      font-size: 16px;
+      color: rgba(255,255,255,.75);
+      max-width: 480px;
+      line-height: 1.7;
+    }
+
+    /* ============================================================
+       FEED
+       ============================================================ */
+    .feed {
+      padding: 80px 0 96px;
+    }
+    .feed-list {
+      display: flex;
+      flex-direction: column;
+      gap: 64px;
+    }
+
+    /* Real entry */
+    .feed-item {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 48px;
+      align-items: center;
+    }
+    .feed-item:nth-child(even) .feed-item-img { order: 2; }
+    .feed-item:nth-child(even) .feed-item-body { order: 1; }
+
+    .feed-item-img {
+      position: relative;
+      border-radius: var(--r-xl);
+      overflow: hidden;
+      aspect-ratio: 4 / 3;
+      background: var(--green-100);
+    }
+    .feed-item-img img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: transform 600ms var(--ease);
+    }
+    .feed-item:hover .feed-item-img img {
+      transform: scale(1.03);
+    }
+
+    .feed-item-body {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+    .feed-item-meta {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+    .feed-item-tag {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: .10em;
+      text-transform: uppercase;
+      color: var(--green-700);
+      background: var(--green-100);
+      border-radius: 999px;
+      padding: 4px 12px;
+    }
+    .feed-item-location {
+      font-size: 12px;
+      color: var(--neutral-500);
+      font-weight: 500;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+    .feed-item-year {
+      font-size: 12px;
+      color: var(--neutral-400);
+      margin-left: auto;
+    }
+    .feed-item-title {
+      font-family: var(--font-display);
+      font-size: clamp(22px, 2.5vw, 30px);
+      font-weight: 700;
+      color: var(--green-900);
+      line-height: 1.25;
+    }
+    .feed-item-desc {
+      font-size: 15px;
+      color: var(--neutral-600);
+      line-height: 1.75;
+      max-width: 440px;
+    }
+
+    /* Placeholder entry */
+    .feed-item-placeholder .feed-item-img {
+      background: var(--green-100);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .feed-item-placeholder .feed-item-img-inner {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 12px;
+      color: var(--green-400);
+    }
+    .feed-item-placeholder .feed-item-img-inner svg {
+      opacity: .5;
+    }
+    .feed-item-placeholder .feed-item-img-inner span {
+      font-size: 12px;
+      font-weight: 500;
+      color: var(--green-600);
+      opacity: .7;
+    }
+    .feed-item-placeholder .feed-item-title {
+      color: var(--neutral-400);
+    }
+    .feed-item-placeholder .feed-item-desc {
+      color: var(--neutral-300);
+    }
+    .feed-item-placeholder .feed-item-tag {
+      background: var(--neutral-100);
+      color: var(--neutral-400);
+    }
+    .feed-item-placeholder .feed-item-location,
+    .feed-item-placeholder .feed-item-year {
+      color: var(--neutral-300);
+    }
+
+    /* CTA strip */
+    .feed-cta {
+      margin-top: 80px;
+      padding: 56px 48px;
+      background: var(--green-900);
+      border-radius: var(--r-2xl);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 32px;
+      flex-wrap: wrap;
+    }
+    .feed-cta-text {}
+    .feed-cta-label {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+      color: var(--orange-400);
+      margin-bottom: 8px;
+    }
+    .feed-cta-title {
+      font-family: var(--font-display);
+      font-size: clamp(22px, 3vw, 30px);
+      font-weight: 700;
+      color: var(--white);
+      line-height: 1.25;
+    }
+
+    /* ============================================================
+       FOOTER
+       ============================================================ */
+    .footer {
+      background: var(--green-900);
+      padding: 56px 0 40px;
+    }
+    .footer-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 32px;
+      flex-wrap: wrap;
+    }
+    .footer-logo img {
+      height: 92px;
+      width: auto;
+      display: block;
+    }
+    .footer-copy {
+      font-size: 13px;
+      color: rgba(255,255,255,.65);
+      text-align: center;
+    }
+    .footer-links {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+    .footer-links a {
+      font-size: 13px;
+      color: rgba(255,255,255,.72);
+      font-weight: 500;
+      transition: color var(--dur);
+    }
+    .footer-links a:hover { color: var(--white); }
+    .footer-fb {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(255,255,255,.10);
+      border: 1px solid rgba(255,255,255,.20);
+      border-radius: 999px;
+      padding: 8px 16px;
+      font-size: 13px;
+      font-weight: 500;
+      color: rgba(255,255,255,.85);
+      transition: background var(--dur), color var(--dur);
+    }
+    .footer-fb:hover {
+      background: rgba(255,255,255,.18);
+      color: var(--white);
+    }
+
+    /* ============================================================
+       RESPONSIVE
+       ============================================================ */
+    @media (max-width: 900px) {
+      .container { padding-inline: 20px; }
+      .nav-panel { display: none; }
+      .nav-toggle { display: flex; }
+      .nav.nav-mobile-open .nav-panel {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0;
+        position: absolute;
+        top: 72px;
+        inset-inline: 0;
+        background: rgba(247,247,244,.97);
+        backdrop-filter: blur(8px);
+        padding: 16px 24px 24px;
+        box-shadow: 0 8px 24px rgba(28,28,26,.10);
+      }
+      .nav.nav-mobile-open .nav-links {
+        flex-direction: column;
+        align-items: flex-start;
+        width: 100%;
+        gap: 2px;
+      }
+      .nav.nav-mobile-open .nav-links a { color: var(--neutral-700); }
+      .nav.nav-mobile-open .nav-cta { margin-top: 12px; }
+      .feed-item {
+        grid-template-columns: 1fr;
+        gap: 24px;
+      }
+      .feed-item:nth-child(even) .feed-item-img { order: unset; }
+      .feed-item:nth-child(even) .feed-item-body { order: unset; }
+      .feed-cta { padding: 40px 28px; }
+      .footer-inner { flex-direction: column; align-items: flex-start; gap: 20px; }
+      .footer-copy { text-align: left; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ============================================================
+       NAV
+       ============================================================ -->
+  <nav class="nav" id="nav">
+    <div class="container">
+      <div class="nav-inner">
+
+        <a href="index.html" class="nav-logo">
+          <div class="nav-logo-wrap">
+            <img class="nav-logo-hero" src="Logo v5.png" alt="Tuinen Janssens">
+            <img class="nav-logo-scrolled" src="Logo verticaal v4.png" alt="Tuinen Janssens">
+          </div>
+        </a>
+
+        <div class="nav-panel">
+          <ul class="nav-links">
+            <li><a href="diensten.html">Diensten</a></li>
+            <li><a href="realisaties.html" class="active">Realisaties</a></li>
+            <li><a href="over-ons.html">Over ons</a></li>
+            <li><a href="contact.html">Contact</a></li>
+          </ul>
+          <a href="contact.html" class="btn btn-primary nav-cta">Offerte aanvragen</a>
+        </div>
+
+        <button class="nav-toggle" id="navToggle" aria-label="Menu openen">
+          <span></span><span></span><span></span>
+        </button>
+
+      </div>
+    </div>
+  </nav>
+
+  <!-- ============================================================
+       PAGE HEADER
+       ============================================================ -->
+  <header class="page-header">
+    <div class="page-header-bg"></div>
+    <div class="page-header-overlay"></div>
+    <div class="container">
+      <div class="page-header-content">
+        <p class="page-header-label">Ons werk</p>
+        <h1 class="page-header-title">Realisaties</h1>
+        <p class="page-header-sub">Elk project is uniek. Hier vindt u een overzicht van tuinen die wij ontwierpen, aanlegden of onderhouden.</p>
+      </div>
+    </div>
+  </header>
+
+  <!-- ============================================================
+       FEED
+       ============================================================ -->
+  <main class="feed">
+    <div class="container">
+      <ul class="feed-list">
+
+        <!-- Realisatie 1 — echte foto -->
+        <li class="feed-item reveal">
+          <div class="feed-item-img">
+            <img
+              src="Projectfoto's/510226915_1309700247528115_6538786310940227683_n.jpg"
+              alt="Aangelegde tuin met fruitboom en gazon, Harelbeke"
+              loading="lazy"
+            >
+          </div>
+          <div class="feed-item-body">
+            <div class="feed-item-meta">
+              <span class="feed-item-tag">Tuinaanleg</span>
+              <span class="feed-item-location">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13S3 17 3 10a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                Harelbeke
+              </span>
+              <span class="feed-item-year">2025</span>
+            </div>
+            <h2 class="feed-item-title">Familietuin met fruitboom en gazon</h2>
+            <p class="feed-item-desc">Een verzorgde familietuin met een centrale fruitboom, gemulchte plantenborder en ruim gazon. Rustig, onderhoudsvriendelijk en afgeschermd door een groene haag.</p>
+          </div>
+        </li>
+
+        <!-- Realisatie 2 -->
+        <li class="feed-item reveal">
+          <div class="feed-item-img">
+            <img
+              src="Projectfoto's/aanleg_kunstgras_kleine_tuin.jpg"
+              alt="Kleine tuin aangelegd met kunstgras, Harelbeke"
+              loading="lazy"
+            >
+          </div>
+          <div class="feed-item-body">
+            <div class="feed-item-meta">
+              <span class="feed-item-tag">Tuinaanleg</span>
+              <span class="feed-item-location">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13S3 17 3 10a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                Harelbeke
+              </span>
+              <span class="feed-item-year">2024</span>
+            </div>
+            <h2 class="feed-item-title">Kleine tuin met kunstgras</h2>
+            <p class="feed-item-desc">Compacte stadstuin volledig omgebouwd naar kunstgras — onderhoudsvriendelijk, krasbestendig en het hele jaar door fris groen.</p>
+          </div>
+        </li>
+
+        <!-- Realisatie 3 -->
+        <li class="feed-item reveal">
+          <div class="feed-item-img">
+            <img
+              src="Projectfoto's/maaien_van_lang_gras_na.jpg"
+              alt="Gazon professioneel gemaaid, Harelbeke"
+              loading="lazy"
+            >
+          </div>
+          <div class="feed-item-body">
+            <div class="feed-item-meta">
+              <span class="feed-item-tag">Tuinonderhoud</span>
+              <span class="feed-item-location">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13S3 17 3 10a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                Harelbeke
+              </span>
+              <span class="feed-item-year">2024</span>
+            </div>
+            <h2 class="feed-item-title">Maaibeurt: verwilderd gazon hersteld</h2>
+            <p class="feed-item-desc">Lang en verwaarloosd gazon professioneel teruggebracht. Van verwilderd naar kort en verzorgd in één gerichte behandeling.</p>
+          </div>
+        </li>
+
+        <!-- Realisatie 4 -->
+        <li class="feed-item reveal">
+          <div class="feed-item-img">
+            <img
+              src="Projectfoto's/reinigen_tuin1.jpg"
+              alt="Grondige tuinreiniging uitgevoerd, Harelbeke"
+              loading="lazy"
+            >
+          </div>
+          <div class="feed-item-body">
+            <div class="feed-item-meta">
+              <span class="feed-item-tag">Tuinonderhoud</span>
+              <span class="feed-item-location">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13S3 17 3 10a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                Harelbeke
+              </span>
+              <span class="feed-item-year">2024</span>
+            </div>
+            <h2 class="feed-item-title">Grondige tuinreiniging</h2>
+            <p class="feed-item-desc">Volledige reiniging van terras, borders en gazonranden. Onkruid verwijderd, tegels gereinigd en tuin klaar voor het seizoen.</p>
+          </div>
+        </li>
+
+      </ul>
+
+      <!-- CTA strip -->
+      <div class="feed-cta reveal">
+        <div class="feed-cta-text">
+          <p class="feed-cta-label">Uw project</p>
+          <h2 class="feed-cta-title">Uw tuin staat hier straks ook.</h2>
+        </div>
+        <a href="index.html#contact" class="btn btn-primary">Offerte aanvragen</a>
+      </div>
+
+    </div>
+  </main>
+
+  <!-- ============================================================
+       FOOTER
+       ============================================================ -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-inner">
+
+        <a href="index.html" class="footer-logo">
+          <img src="Logo v5.png" alt="Tuinen Janssens">
+        </a>
+
+        <p class="footer-copy">
+          &copy; 2026 Tuinen Janssens &middot; Bram Janssens<br>
+          Veldstraat 4, 8530 Harelbeke
+        </p>
+
+        <div class="footer-links">
+          <a href="https://www.facebook.com/p/Tuinen-Janssens-100054644550594/" target="_blank" rel="noopener" class="footer-fb">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/>
+            </svg>
+            Facebook
+          </a>
+        </div>
+
+      </div>
+    </div>
+  </footer>
+
+  <!-- ============================================================
+       JAVASCRIPT
+       ============================================================ -->
+  <script>
+    // Nav scroll state
+    const nav = document.getElementById('nav');
+    window.addEventListener('scroll', () => {
+      nav.classList.toggle('scrolled', window.scrollY > 40);
+    }, { passive: true });
+
+    // Scroll reveal
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          e.target.classList.add('visible');
+          observer.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.10, rootMargin: '0px 0px -40px 0px' });
+
+    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+    // Mobile nav toggle
+    document.getElementById('navToggle').addEventListener('click', () => {
+      nav.classList.toggle('nav-mobile-open');
+    });
+
+    document.querySelectorAll('.nav-panel a').forEach(link => {
+      link.addEventListener('click', () => nav.classList.remove('nav-mobile-open'));
+    });
+  </script>
+
+</body>
+</html>

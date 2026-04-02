@@ -1,0 +1,1295 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tuinen Janssens uit Harelbeke</title>
+  <meta name="description" content="Tuinen Janssens – Bram Janssens ontwerpt, legt aan en onderhoudt tijdloze tuinen in Harelbeke en omgeving. Van tuindroom tot droomtuin.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <style>
+    /* ============================================================
+       TOKENS
+       ============================================================ */
+    :root {
+      --green-900: #1A2E14;
+      --green-800: #2D4A22;
+      --green-700: #3D6130;
+      --green-600: #4E7A3C;
+      --green-500: #5E9247;
+      --green-400: #7CAF62;
+      --green-300: #A4C98C;
+      --green-200: #C8DFB6;
+      --green-100: #E6F2DA;
+      --green-50:  #F3F9EE;
+
+      --orange-700: #9E4318;
+      --orange-600: #B84F1C;
+      --orange-500: #C8581F;
+      --orange-400: #D96B30;
+      --orange-300: #E88F5E;
+      --orange-100: #FAD9C3;
+      --orange-50:  #FDF0E8;
+
+      --neutral-900: #1C1C1A;
+      --neutral-800: #2E2D2A;
+      --neutral-700: #474540;
+      --neutral-600: #605E58;
+      --neutral-500: #7A7870;
+      --neutral-400: #9A9890;
+      --neutral-300: #BBBAB3;
+      --neutral-200: #D5D4CC;
+      --neutral-100: #EDECE8;
+      --neutral-50:  #F7F7F4;
+      --white: #FFFFFF;
+
+      --font-display: 'Playfair Display', Georgia, serif;
+      --font-body:    'DM Sans', system-ui, sans-serif;
+
+      --r-sm:  4px;
+      --r-md:  8px;
+      --r-lg:  16px;
+      --r-xl:  24px;
+      --r-2xl: 32px;
+
+      --shadow-sm: 0 1px 3px rgba(28,28,26,.08), 0 1px 2px rgba(28,28,26,.04);
+      --shadow-md: 0 4px 12px rgba(28,28,26,.10), 0 2px 4px rgba(28,28,26,.06);
+      --shadow-lg: 0 12px 32px rgba(28,28,26,.12), 0 4px 8px rgba(28,28,26,.06);
+
+      --ease: cubic-bezier(0.16, 1, 0.3, 1);
+      --dur:  300ms;
+    }
+
+    /* ============================================================
+       RESET & BASE
+       ============================================================ */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; font-size: 16px; }
+    body {
+      font-family: var(--font-body);
+      background: var(--neutral-50);
+      color: var(--neutral-800);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+    img { display: block; max-width: 100%; }
+    a { color: inherit; text-decoration: none; }
+    ul { list-style: none; }
+
+    /* ============================================================
+       UTILITIES
+       ============================================================ */
+    .container {
+      max-width: 1160px;
+      margin-inline: auto;
+      padding-inline: 32px;
+    }
+    .label {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+      color: var(--orange-500);
+    }
+    .section-title {
+      font-family: var(--font-display);
+      font-size: clamp(28px, 4vw, 38px);
+      font-weight: 700;
+      color: var(--green-900);
+      line-height: 1.2;
+      margin-top: 8px;
+    }
+    .section-intro {
+      font-size: 16px;
+      color: var(--neutral-600);
+      max-width: 520px;
+      margin-top: 16px;
+      line-height: 1.75;
+    }
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-family: var(--font-body);
+      font-size: 14px;
+      font-weight: 600;
+      border-radius: var(--r-pill, 999px);
+      padding: 12px 28px;
+      cursor: pointer;
+      border: 2px solid transparent;
+      transition: background var(--dur) var(--ease),
+                  color var(--dur) var(--ease),
+                  border-color var(--dur) var(--ease),
+                  box-shadow var(--dur) var(--ease),
+                  transform 150ms var(--ease);
+      white-space: nowrap;
+    }
+    .btn:hover { transform: translateY(-1px); }
+    .btn:active { transform: translateY(0); }
+    .btn-primary {
+      background: var(--orange-500);
+      color: var(--white);
+      box-shadow: 0 4px 16px rgba(200,88,31,.30);
+    }
+    .btn-primary:hover {
+      background: var(--orange-400);
+      box-shadow: 0 6px 24px rgba(200,88,31,.40);
+    }
+    .btn-ghost-light {
+      background: transparent;
+      color: var(--white);
+      border-color: rgba(255,255,255,.5);
+    }
+    .btn-ghost-light:hover {
+      background: rgba(255,255,255,.12);
+      border-color: rgba(255,255,255,.8);
+    }
+    .btn-outline-green {
+      background: transparent;
+      color: var(--green-700);
+      border-color: var(--green-300);
+    }
+    .btn-outline-green:hover {
+      background: var(--green-50);
+      border-color: var(--green-500);
+    }
+
+    /* Fade-in on scroll */
+    .reveal {
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity 0.65s var(--ease), transform 0.65s var(--ease);
+    }
+    .reveal.visible {
+      opacity: 1;
+      transform: none;
+    }
+    .reveal-delay-1 { transition-delay: 100ms; }
+    .reveal-delay-2 { transition-delay: 200ms; }
+    .reveal-delay-3 { transition-delay: 300ms; }
+    .reveal-delay-4 { transition-delay: 400ms; }
+
+    /* ============================================================
+       NAV
+       ============================================================ */
+    .nav {
+      position: fixed;
+      inset-block-start: 0;
+      inset-inline: 0;
+      z-index: 100;
+      background: transparent;
+      transition: background var(--dur) var(--ease),
+                  box-shadow var(--dur) var(--ease),
+                  backdrop-filter var(--dur) var(--ease);
+    }
+    .nav.scrolled {
+      background: rgba(247,247,244,.95);
+      backdrop-filter: blur(8px);
+      box-shadow: 0 1px 0 rgba(28,28,26,.08);
+    }
+    .nav-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 72px;
+      gap: 32px;
+    }
+    .nav-logo {
+      position: relative;
+      display: block;
+      height: 96px;
+      width: 240px;
+      transition: height 400ms var(--ease), width 400ms var(--ease);
+    }
+    .nav.scrolled .nav-logo {
+      height: 80px;
+      width: 200px;
+    }
+    .nav-logo-hero,
+    .nav-logo-scrolled {
+      position: absolute;
+      top: 0;
+      left: 0;
+      height: 100%;
+      width: auto;
+      transition: opacity 400ms var(--ease),
+                  filter 400ms var(--ease);
+    }
+    .nav-logo-hero {
+      opacity: 1;
+      filter: drop-shadow(0 0 10px rgba(255,255,255,.45))
+              drop-shadow(0 2px 4px rgba(0,0,0,.25));
+    }
+    .nav-logo-scrolled {
+      opacity: 0;
+    }
+    .nav.scrolled .nav-logo-hero {
+      opacity: 0;
+      filter: none;
+    }
+    .nav.scrolled .nav-logo-scrolled {
+      opacity: 1;
+    }
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .nav-links a {
+      font-size: 14px;
+      font-weight: 500;
+      color: var(--white);
+      padding: 6px 14px;
+      border-radius: var(--r-pill, 999px);
+      transition: color var(--dur), background var(--dur);
+    }
+    .nav.scrolled .nav-links a { color: var(--neutral-700); }
+    .nav-links a:hover {
+      background: rgba(255,255,255,.15);
+      color: var(--white);
+    }
+    .nav.scrolled .nav-links a:hover {
+      background: var(--green-50);
+      color: var(--green-800);
+    }
+    .nav-cta { flex-shrink: 0; }
+    .nav-panel {
+      display: flex;
+      align-items: center;
+      gap: 32px;
+    }
+
+    /* Mobile menu toggle */
+    .nav-toggle {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      cursor: pointer;
+      padding: 6px;
+      background: none;
+      border: none;
+    }
+    .nav-toggle span {
+      display: block;
+      width: 22px;
+      height: 2px;
+      background: var(--white);
+      border-radius: 2px;
+      transition: background var(--dur);
+    }
+    .nav.scrolled .nav-toggle span { background: var(--neutral-800); }
+
+    /* ============================================================
+       HERO
+       ============================================================ */
+    .hero {
+      position: relative;
+      min-height: 100svh;
+      display: flex;
+      align-items: flex-end;
+      padding-bottom: 96px;
+      overflow: hidden;
+    }
+    .hero-bg {
+      position: absolute;
+      inset: 0;
+      background-image: url('509230108_1308454614319345_1566048337373865804_n.jpg');
+      background-size: cover;
+      background-position: center 30%;
+      transform: scale(1.04);
+      transition: transform 8s ease-out;
+    }
+    .hero-bg.loaded { transform: scale(1); }
+    .hero-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(
+        160deg,
+        rgba(26,46,20,.72) 0%,
+        rgba(26,46,20,.55) 50%,
+        rgba(26,46,20,.78) 100%
+      );
+    }
+    .hero-content {
+      position: relative;
+      z-index: 1;
+      max-width: 700px;
+    }
+    .hero-label {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: .18em;
+      text-transform: uppercase;
+      color: var(--green-300);
+      margin-bottom: 20px;
+    }
+    .hero-title {
+      font-family: var(--font-display);
+      font-size: clamp(38px, 6vw, 68px);
+      font-weight: 700;
+      color: var(--white);
+      line-height: 1.1;
+      margin-bottom: 20px;
+    }
+    .hero-title em {
+      font-style: italic;
+      color: var(--green-300);
+    }
+    .hero-sub {
+      font-size: 17px;
+      color: rgba(255,255,255,.78);
+      max-width: 480px;
+      line-height: 1.75;
+      margin-bottom: 40px;
+    }
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+    .hero-scroll {
+      position: absolute;
+      bottom: 32px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+      color: rgba(255,255,255,.5);
+      font-size: 11px;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+    }
+    .hero-scroll-line {
+      width: 1px;
+      height: 40px;
+      background: rgba(255,255,255,.3);
+      animation: scrollLine 2s ease-in-out infinite;
+    }
+    @keyframes scrollLine {
+      0%, 100% { transform: scaleY(1); opacity: 1; }
+      50% { transform: scaleY(.5); opacity: .4; }
+    }
+
+    /* ============================================================
+       DIENSTEN
+       ============================================================ */
+    .diensten {
+      padding: 112px 0 96px;
+    }
+    .diensten-header {
+      margin-bottom: 64px;
+    }
+    .diensten-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+    }
+    .dienst-card {
+      background: var(--white);
+      border: 1px solid var(--neutral-200);
+      border-radius: var(--r-xl);
+      padding: 40px 36px;
+      box-shadow: var(--shadow-sm);
+      position: relative;
+      overflow: hidden;
+      transition: box-shadow var(--dur) var(--ease),
+                  transform var(--dur) var(--ease),
+                  border-color var(--dur) var(--ease);
+    }
+    .dienst-card::before {
+      content: '';
+      position: absolute;
+      inset-block: 0;
+      inset-inline-start: 0;
+      width: 3px;
+      background: var(--green-500);
+      transform: scaleY(0);
+      transform-origin: bottom;
+      transition: transform var(--dur) var(--ease);
+      border-radius: 0 2px 2px 0;
+    }
+    .dienst-card:hover {
+      box-shadow: var(--shadow-lg);
+      transform: translateY(-4px);
+      border-color: var(--green-200);
+    }
+    .dienst-card:hover::before { transform: scaleY(1); }
+    .dienst-icon {
+      width: 52px;
+      height: 52px;
+      background: var(--green-50);
+      border-radius: var(--r-lg);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 24px;
+      color: var(--green-700);
+      transition: background var(--dur);
+    }
+    .dienst-card:hover .dienst-icon {
+      background: var(--green-100);
+    }
+    .dienst-title {
+      font-family: var(--font-display);
+      font-size: 22px;
+      font-weight: 700;
+      color: var(--green-900);
+      margin-bottom: 12px;
+      line-height: 1.25;
+    }
+    .dienst-desc {
+      font-size: 14px;
+      color: var(--neutral-600);
+      line-height: 1.75;
+      margin-bottom: 24px;
+    }
+    .dienst-list {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+    .dienst-list li {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      font-size: 13px;
+      color: var(--neutral-700);
+      line-height: 1.5;
+    }
+    .dienst-list li::before {
+      content: '';
+      width: 6px;
+      height: 6px;
+      background: var(--green-400);
+      border-radius: 50%;
+      flex-shrink: 0;
+      margin-top: 6px;
+    }
+
+    /* ============================================================
+       OVER ONS
+       ============================================================ */
+    .over-ons {
+      padding: 96px 0;
+      background: var(--green-900);
+      overflow: hidden;
+      position: relative;
+    }
+    .over-ons::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse at 80% 50%, rgba(93,146,71,.18) 0%, transparent 60%);
+      pointer-events: none;
+    }
+    .over-ons-inner {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: center;
+    }
+    .over-ons .label { color: var(--green-400); }
+    .over-ons .section-title { color: var(--white); }
+    .over-ons-text {
+      font-size: 16px;
+      color: rgba(255,255,255,.72);
+      line-height: 1.8;
+      margin-top: 20px;
+    }
+    .over-ons-text + .over-ons-text { margin-top: 16px; }
+    .over-ons-stats {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+      margin-top: 40px;
+    }
+    .stat {
+      background: rgba(255,255,255,.06);
+      border: 1px solid rgba(255,255,255,.10);
+      border-radius: var(--r-lg);
+      padding: 24px;
+    }
+    .stat-number {
+      font-family: var(--font-display);
+      font-size: 36px;
+      font-weight: 700;
+      color: var(--white);
+      line-height: 1;
+      margin-bottom: 6px;
+    }
+    .stat-label {
+      font-size: 13px;
+      color: var(--green-400);
+      font-weight: 500;
+    }
+    .over-ons-visual {
+      position: relative;
+    }
+    .over-ons-img-wrap {
+      border-radius: var(--r-2xl);
+      overflow: hidden;
+      aspect-ratio: 4/5;
+      box-shadow: 0 32px 64px rgba(0,0,0,.4);
+    }
+    .over-ons-img-wrap img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      filter: brightness(.9) saturate(1.1);
+    }
+    .over-ons-badge {
+      position: absolute;
+      bottom: -20px;
+      left: -24px;
+      background: var(--orange-500);
+      color: var(--white);
+      border-radius: var(--r-xl);
+      padding: 20px 24px;
+      box-shadow: 0 8px 32px rgba(200,88,31,.40);
+    }
+    .over-ons-badge-year {
+      font-family: var(--font-display);
+      font-size: 28px;
+      font-weight: 700;
+      line-height: 1;
+    }
+    .over-ons-badge-text {
+      font-size: 12px;
+      font-weight: 500;
+      opacity: .85;
+      margin-top: 4px;
+    }
+
+    /* ============================================================
+       REALISATIES
+       ============================================================ */
+    .realisaties {
+      padding: 112px 0 96px;
+    }
+    .realisaties-header {
+      margin-bottom: 56px;
+    }
+    .gallery {
+      display: grid;
+      grid-template-columns: repeat(12, 1fr);
+      grid-template-rows: 280px 280px;
+      gap: 16px;
+    }
+    .gallery-item {
+      overflow: hidden;
+      border-radius: var(--r-lg);
+      background: var(--neutral-200);
+      cursor: pointer;
+    }
+    .gallery-item img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.7s var(--ease), filter 0.7s var(--ease);
+      filter: brightness(.95);
+    }
+    .gallery-item:hover img {
+      transform: scale(1.06);
+      filter: brightness(1.05);
+    }
+    .gallery-item:nth-child(1) { grid-column: span 7; grid-row: span 2; }
+    .gallery-item:nth-child(2) { grid-column: span 5; }
+    .gallery-item:nth-child(3) { grid-column: span 5; }
+    .gallery-item-cta {
+      background: var(--green-100);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-decoration: none;
+      transition: background var(--dur) var(--ease);
+    }
+    .gallery-item-cta:hover { background: var(--green-200); }
+
+    .gallery-cta {
+      margin-top: 40px;
+      text-align: center;
+    }
+    .gallery-note {
+      font-size: 13px;
+      color: var(--neutral-400);
+      margin-top: 12px;
+    }
+
+    /* ============================================================
+       CONTACT
+       ============================================================ */
+    .contact {
+      padding: 96px 0 112px;
+      background: var(--neutral-100);
+    }
+    .contact-inner {
+      display: grid;
+      grid-template-columns: 1fr 1.2fr;
+      gap: 80px;
+      align-items: start;
+    }
+    .contact-info-block {
+      margin-top: 40px;
+      display: flex;
+      flex-direction: column;
+      gap: 28px;
+    }
+    .contact-info-item {
+      display: flex;
+      gap: 16px;
+      align-items: flex-start;
+    }
+    .contact-info-icon {
+      width: 40px;
+      height: 40px;
+      background: var(--green-50);
+      border: 1px solid var(--green-200);
+      border-radius: var(--r-md);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      color: var(--green-700);
+    }
+    .contact-info-label {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      color: var(--neutral-400);
+      margin-bottom: 4px;
+    }
+    .contact-info-value {
+      font-size: 15px;
+      color: var(--neutral-800);
+      font-weight: 500;
+      line-height: 1.5;
+    }
+    .contact-info-value a:hover { color: var(--green-700); }
+
+    /* Form */
+    .contact-form-wrap {
+      background: var(--white);
+      border: 1px solid var(--neutral-200);
+      border-radius: var(--r-2xl);
+      padding: 48px 44px;
+      box-shadow: var(--shadow-md);
+    }
+    .form-title {
+      font-family: var(--font-display);
+      font-size: 22px;
+      font-weight: 700;
+      color: var(--green-900);
+      margin-bottom: 6px;
+    }
+    .form-sub {
+      font-size: 14px;
+      color: var(--neutral-500);
+      margin-bottom: 32px;
+    }
+    .form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      margin-bottom: 16px;
+    }
+    .form-group.full { grid-column: 1 / -1; }
+    label {
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--neutral-700);
+    }
+    input, textarea, select {
+      font-family: var(--font-body);
+      font-size: 15px;
+      color: var(--neutral-800);
+      background: var(--neutral-50);
+      border: 1.5px solid var(--neutral-200);
+      border-radius: var(--r-md);
+      padding: 12px 16px;
+      width: 100%;
+      transition: border-color var(--dur), box-shadow var(--dur);
+      outline: none;
+      -webkit-appearance: none;
+    }
+    input::placeholder, textarea::placeholder { color: var(--neutral-400); }
+    input:focus, textarea:focus, select:focus {
+      border-color: var(--green-500);
+      box-shadow: 0 0 0 3px rgba(94,146,71,.14);
+      background: var(--white);
+    }
+    textarea { resize: vertical; min-height: 120px; }
+    .form-submit { margin-top: 8px; width: 100%; justify-content: center; border-radius: var(--r-md); }
+
+    /* ============================================================
+       FOOTER
+       ============================================================ */
+    .footer {
+      background: var(--green-900);
+      padding: 56px 0 40px;
+    }
+    .footer-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 32px;
+      flex-wrap: wrap;
+    }
+    .footer-logo img {
+      height: 92px;
+      width: auto;
+      display: block;
+    }
+    .footer-copy {
+      font-size: 13px;
+      color: rgba(255,255,255,.65);
+      text-align: center;
+    }
+    .footer-links {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+    .footer-links a {
+      font-size: 13px;
+      color: rgba(255,255,255,.72);
+      font-weight: 500;
+      transition: color var(--dur);
+    }
+    .footer-links a:hover { color: var(--white); }
+    .footer-fb {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(255,255,255,.10);
+      border: 1px solid rgba(255,255,255,.20);
+      border-radius: var(--r-pill, 999px);
+      padding: 8px 16px;
+      font-size: 13px;
+      font-weight: 500;
+      color: rgba(255,255,255,.85);
+      transition: background var(--dur), color var(--dur);
+    }
+    .footer-fb:hover {
+      background: rgba(255,255,255,.18);
+      color: var(--white);
+    }
+
+    /* ============================================================
+       RESPONSIVE
+       ============================================================ */
+    @media (max-width: 900px) {
+      .diensten-grid { grid-template-columns: 1fr; gap: 16px; }
+      .over-ons-inner { grid-template-columns: 1fr; gap: 48px; }
+      .over-ons-visual { display: none; }
+      .contact-inner { grid-template-columns: 1fr; gap: 48px; }
+      .gallery {
+        grid-template-columns: 1fr 1fr;
+        grid-template-rows: auto;
+      }
+      .gallery-item { aspect-ratio: 4/3; }
+      .gallery-item:nth-child(1),
+      .gallery-item:nth-child(2),
+      .gallery-item:nth-child(3) {
+        grid-column: span 1;
+        grid-row: span 1;
+      }
+    }
+    @media (max-width: 640px) {
+      .container { padding-inline: 20px; }
+      .nav-panel { display: none; }
+      .nav-toggle { display: flex; }
+
+      .nav-mobile-open .nav-panel {
+        display: flex;
+        flex-direction: column;
+        position: absolute;
+        top: 72px;
+        inset-inline: 0;
+        background: var(--neutral-50);
+        border-top: 1px solid var(--neutral-200);
+        box-shadow: var(--shadow-lg);
+        padding: 12px 20px 24px;
+        gap: 4px;
+      }
+      .nav-mobile-open .nav-links {
+        display: flex;
+        flex-direction: column;
+      }
+      .nav-mobile-open .nav-links a {
+        color: var(--neutral-800);
+        font-size: 16px;
+        padding: 12px 12px;
+        border-radius: var(--r-md);
+        border-bottom: 1px solid var(--neutral-100);
+      }
+      .nav-mobile-open .nav-links li:last-child a { border-bottom: none; }
+      .nav-mobile-open .nav-links a:hover {
+        background: var(--green-50);
+        color: var(--green-800);
+      }
+      .nav-mobile-open .nav-cta {
+        display: block;
+        margin-top: 12px;
+        text-align: center;
+        border-radius: var(--r-md);
+      }
+      .hero { padding-bottom: 72px; }
+      .hero-title { font-size: 36px; }
+      .hero-actions { flex-direction: column; }
+      .diensten { padding: 80px 0 64px; }
+      .over-ons { padding: 80px 0; }
+      .over-ons-stats { grid-template-columns: 1fr 1fr; }
+      .realisaties { padding: 80px 0 64px; }
+      .contact { padding: 80px 0; }
+      .contact-form-wrap { padding: 32px 24px; }
+      .form-row { grid-template-columns: 1fr; }
+      .gallery { grid-template-columns: 1fr; }
+      .footer-inner { flex-direction: column; align-items: flex-start; gap: 20px; }
+      .footer-copy { text-align: left; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ============================================================
+       NAV
+       ============================================================ -->
+  <nav class="nav" id="nav">
+    <div class="container">
+      <div class="nav-inner">
+
+        <a href="#" class="nav-logo">
+          <img class="nav-logo-hero" src="Logo v5.png" alt="Tuinen Janssens">
+          <img class="nav-logo-scrolled" src="Logo verticaal v4.png" alt="Tuinen Janssens">
+        </a>
+
+        <div class="nav-panel">
+          <ul class="nav-links">
+            <li><a href="diensten.html">Diensten</a></li>
+            <li><a href="realisaties.html">Realisaties</a></li>
+            <li><a href="over-ons.html">Over ons</a></li>
+            <li><a href="contact.html">Contact</a></li>
+          </ul>
+          <a href="contact.html" class="btn btn-primary nav-cta">Offerte aanvragen</a>
+        </div>
+
+        <button class="nav-toggle" id="navToggle" aria-label="Menu openen">
+          <span></span><span></span><span></span>
+        </button>
+
+      </div>
+    </div>
+  </nav>
+
+  <!-- ============================================================
+       HERO
+       ============================================================ -->
+  <section class="hero" id="hero">
+    <div class="hero-bg" id="heroBg"></div>
+    <div class="hero-overlay"></div>
+
+    <div class="container">
+      <div class="hero-content">
+        <p class="hero-label reveal">Harelbeke &amp; omgeving</p>
+        <h1 class="hero-title reveal reveal-delay-1">
+          Van tuindroom<br>tot <em>droomtuin</em>
+        </h1>
+        <p class="hero-sub reveal reveal-delay-2">
+          Bram Janssens ontwerpt, legt aan en onderhoudt tijdloze tuinen op maat.
+          Van kleine stadstuintjes tot grote landschapstuinen, altijd van A tot Z.
+        </p>
+        <div class="hero-actions reveal reveal-delay-3">
+          <a href="#contact" class="btn btn-primary">Offerte aanvragen</a>
+          <a href="diensten.html" class="btn btn-ghost-light">Onze diensten</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="hero-scroll">
+      <div class="hero-scroll-line"></div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       DIENSTEN
+       ============================================================ -->
+  <section class="diensten" id="diensten">
+    <div class="container">
+
+      <div class="diensten-header reveal">
+        <p class="label">Wat we doen</p>
+        <h2 class="section-title">Een totaalaanbod<br>voor uw tuin</h2>
+        <p class="section-intro">
+          Of u nu een nieuwe tuin wil laten aanleggen, een bestaande tuin wil renoveren
+          of regelmatig onderhoud zoekt: Tuinen Janssens staat voor u klaar.
+        </p>
+      </div>
+
+      <div class="diensten-grid">
+
+        <!-- Ontwerp -->
+        <article class="dienst-card reveal reveal-delay-1">
+          <div class="dienst-icon">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M2 20h20M6 20V10l6-7 6 7v10"/>
+              <rect x="9" y="14" width="6" height="6"/>
+              <path d="M9 14v-2a3 3 0 0 1 6 0v2"/>
+            </svg>
+          </div>
+          <h3 class="dienst-title">Tuinontwerp</h3>
+          <p class="dienst-desc">
+            Een tuin begint met een sterk concept. We luisteren naar uw wensen
+            en vertalen die naar een tijdloos, persoonlijk ontwerp.
+          </p>
+          <ul class="dienst-list">
+            <li>Tijdloze en hedendaagse tuinen</li>
+            <li>Klassieke landschapstuinen</li>
+            <li>Kleine stadstuintjes</li>
+            <li>Renovaties van bestaande tuinen</li>
+            <li>Creatieve oplossingen op maat</li>
+          </ul>
+        </article>
+
+        <!-- Aanleg -->
+        <article class="dienst-card reveal reveal-delay-2">
+          <div class="dienst-icon">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M3 21h18"/>
+              <path d="M5 21V9l7-6 7 6v12"/>
+              <path d="M12 21v-6"/>
+              <rect x="7" y="12" width="10" height="4" rx="1"/>
+            </svg>
+          </div>
+          <h3 class="dienst-title">Tuinaanleg</h3>
+          <p class="dienst-desc">
+            Van grondwerken tot de laatste steen: wij realiseren uw tuin van A tot Z.
+            Praktisch, rustgevend en met oog voor detail.
+          </p>
+          <ul class="dienst-list">
+            <li>Volledige realisatie van ontwerp tot oplevering</li>
+            <li>Verhardingen en terrasaanleg</li>
+            <li>Beplanting en gazonaanleg</li>
+            <li>Vijvers en waterpartijen</li>
+            <li>Sterke en unieke concepten</li>
+          </ul>
+        </article>
+
+        <!-- Onderhoud -->
+        <article class="dienst-card reveal reveal-delay-3">
+          <div class="dienst-icon">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M12 2a10 10 0 0 1 0 20"/>
+              <path d="M12 2a10 10 0 0 0 0 20"/>
+              <path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4"/>
+            </svg>
+          </div>
+          <h3 class="dienst-title">Tuinonderhoud</h3>
+          <p class="dienst-desc">
+            Een mooie tuin vraagt regelmatige zorg. Wij houden uw groene ruimte
+            het hele jaar door in perfecte staat.
+          </p>
+          <ul class="dienst-list">
+            <li>Snoeiwerken: hagen, struiken en bomen</li>
+            <li>Onderhoud gazon en borders</li>
+            <li>Vernieuwen van gazons</li>
+            <li>Seizoensgebonden onderhoud</li>
+            <li>Periodieke onderhoudscontracten</li>
+          </ul>
+        </article>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       OVER ONS
+       ============================================================ -->
+  <section class="over-ons" id="over-ons">
+    <div class="container">
+      <div class="over-ons-inner">
+
+        <div class="over-ons-copy">
+          <p class="label reveal">Over ons</p>
+          <h2 class="section-title reveal reveal-delay-1">Vakmanschap met<br>een groen hart</h2>
+          <p class="over-ons-text reveal reveal-delay-2">
+            Tuinen Janssens is een eenmanszaak geleid door <strong>Bram Janssens</strong>, gevestigd in Harelbeke.
+            Opgericht in 2018 met één doel: elke klant een tuin geven die bij hem of haar past.
+            Geen standaardoplossingen, maar werk op maat.
+          </p>
+          <p class="over-ons-text reveal reveal-delay-3">
+            Of u kiest voor een tijdloos hedendaags ontwerp of een klassieke landschapstuin,
+            Bram zorgt voor een sterke basis, een doordacht concept en een zorgvuldige uitvoering.
+            Groot of klein project: elk detail telt.
+          </p>
+
+          <div class="over-ons-stats reveal reveal-delay-4">
+            <div class="stat">
+              <div class="stat-number">7+</div>
+              <div class="stat-label">Jaar ervaring</div>
+            </div>
+            <div class="stat">
+              <div class="stat-number">A–Z</div>
+              <div class="stat-label">Totaalaanbod</div>
+            </div>
+            <div class="stat">
+              <div class="stat-number">100%</div>
+              <div class="stat-label">Werk op maat</div>
+            </div>
+            <div class="stat">
+              <div class="stat-number">2018</div>
+              <div class="stat-label">Opgericht</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="over-ons-visual reveal reveal-delay-2">
+          <div class="over-ons-img-wrap">
+            <img src="Projectfoto's/510226915_1309700247528115_6538786310940227683_n.jpg" alt="Aangelegde tuin met fruitboom en gazon, Harelbeke">
+          </div>
+          <div class="over-ons-badge">
+            <div class="over-ons-badge-year">2018</div>
+            <div class="over-ons-badge-text">Opgericht in Harelbeke</div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       REALISATIES
+       ============================================================ -->
+  <section class="realisaties" id="realisaties">
+    <div class="container">
+
+      <div class="realisaties-header reveal">
+        <p class="label">Ons werk</p>
+        <h2 class="section-title">Realisaties</h2>
+        <p class="section-intro">
+          Elk project is uniek. Hieronder een greep uit ons werk:
+          van moderne tuinen tot klassieke landschapsaanleg.
+        </p>
+      </div>
+
+      <div class="gallery">
+        <div class="gallery-item reveal">
+          <img src="Projectfoto's/510226915_1309700247528115_6538786310940227683_n.jpg" alt="Aangelegde tuin met fruitboom en gazon, Harelbeke">
+        </div>
+        <div class="gallery-item reveal reveal-delay-1">
+          <img src="Projectfoto's/reinigen_tuin2.jpg" alt="Tuinreiniging afgewerkt, Harelbeke">
+        </div>
+        <div class="gallery-item reveal reveal-delay-2">
+          <img src="Projectfoto's/lente_schoonmaak_van_tuin_activeren_grasrobot_na_winteronderhoud.jpg" alt="Lenteactivering tuin en grasrobot, Harelbeke">
+        </div>
+      </div>
+
+      <div class="gallery-cta reveal">
+        <a href="https://www.facebook.com/p/Tuinen-Janssens-100054644550594/" target="_blank" rel="noopener" class="btn btn-outline-green">
+          Meer realisaties op Facebook
+        </a>
+        <p class="gallery-note">Nieuwe projecten worden regelmatig gedeeld op onze Facebookpagina</p>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ============================================================
+       CONTACT
+       ============================================================ -->
+  <section class="contact" id="contact">
+    <div class="container">
+
+      <div class="contact-inner">
+
+        <div class="contact-left">
+          <p class="label reveal">Contact</p>
+          <h2 class="section-title reveal reveal-delay-1">Laat van u horen</h2>
+          <p class="section-intro reveal reveal-delay-2">
+            Heeft u een project in gedachten of wil u meer informatie?
+            Neem gerust contact op. We bekijken graag de mogelijkheden samen.
+          </p>
+
+          <div class="contact-info-block">
+
+            <div class="contact-info-item reveal reveal-delay-1">
+              <div class="contact-info-icon">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/>
+                  <circle cx="12" cy="10" r="3"/>
+                </svg>
+              </div>
+              <div>
+                <div class="contact-info-label">Adres</div>
+                <div class="contact-info-value">Veldstraat 4<br>8530 Harelbeke</div>
+              </div>
+            </div>
+
+            <div class="contact-info-item reveal reveal-delay-2">
+              <div class="contact-info-icon">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.61 3.4 2 2 0 0 1 3.6 1.22h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L7.91 8.9a16 16 0 0 0 6 6l.92-.92a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 21.73 16.92Z"/>
+                </svg>
+              </div>
+              <div>
+                <div class="contact-info-label">Telefoon</div>
+                <div class="contact-info-value">
+                  <a href="tel:+32472024162">+32 (0) 472 02 41 62</a>
+                </div>
+              </div>
+            </div>
+
+            <div class="contact-info-item reveal reveal-delay-3">
+              <div class="contact-info-icon">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <rect width="20" height="16" x="2" y="4" rx="2"/>
+                  <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/>
+                </svg>
+              </div>
+              <div>
+                <div class="contact-info-label">E-mail</div>
+                <div class="contact-info-value">
+                  <a href="mailto:janssens.bram@outlook.be">janssens.bram@outlook.be</a>
+                </div>
+              </div>
+            </div>
+
+            <div class="contact-info-item reveal reveal-delay-4">
+              <div class="contact-info-icon">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <circle cx="12" cy="12" r="10"/>
+                  <polyline points="12 6 12 12 16 14"/>
+                </svg>
+              </div>
+              <div>
+                <div class="contact-info-label">Openingstijden</div>
+                <div class="contact-info-value">
+                  Ma – Vr: 08:30 – 17:30<br>
+                  Za – Zo: gesloten
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+        <div class="contact-form-wrap reveal reveal-delay-2">
+          <h3 class="form-title">Stuur een bericht</h3>
+          <p class="form-sub">We nemen zo snel mogelijk contact met u op.</p>
+
+          <form>
+            <div class="form-row">
+              <div class="form-group">
+                <label for="naam">Naam</label>
+                <input type="text" id="naam" name="naam" placeholder="Jan Janssen" autocomplete="name">
+              </div>
+              <div class="form-group">
+                <label for="telefoon">Telefoon</label>
+                <input type="tel" id="telefoon" name="telefoon" placeholder="0470 00 00 00" autocomplete="tel">
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="email">E-mailadres</label>
+              <input type="email" id="email" name="email" placeholder="naam@email.com" autocomplete="email">
+            </div>
+
+            <div class="form-group">
+              <label for="dienst">Waarvoor wenst u contact?</label>
+              <select id="dienst" name="dienst">
+                <option value="">Kies een dienst…</option>
+                <option value="ontwerp">Tuinontwerp</option>
+                <option value="aanleg">Tuinaanleg</option>
+                <option value="onderhoud">Tuinonderhoud</option>
+                <option value="anders">Andere vraag</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label for="bericht">Uw bericht</label>
+              <textarea id="bericht" name="bericht" placeholder="Beschrijf kort uw project of vraag…"></textarea>
+            </div>
+
+            <button type="submit" class="btn btn-primary form-submit">Verstuur bericht</button>
+          </form>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       FOOTER
+       ============================================================ -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-inner">
+
+        <a href="#" class="footer-logo">
+          <img src="Logo v5.png" alt="Tuinen Janssens">
+        </a>
+
+        <p class="footer-copy">
+          &copy; 2026 Tuinen Janssens &middot; Bram Janssens<br>
+          Veldstraat 4, 8530 Harelbeke
+        </p>
+
+        <div class="footer-links">
+          <a href="https://www.facebook.com/p/Tuinen-Janssens-100054644550594/" target="_blank" rel="noopener" class="footer-fb">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/>
+            </svg>
+            Facebook
+          </a>
+        </div>
+
+      </div>
+    </div>
+  </footer>
+
+  <!-- ============================================================
+       JAVASCRIPT
+       ============================================================ -->
+  <script>
+    // Nav scroll state
+    const nav = document.getElementById('nav');
+    window.addEventListener('scroll', () => {
+      nav.classList.toggle('scrolled', window.scrollY > 40);
+    }, { passive: true });
+
+    // Hero bg subtle zoom
+    const heroBg = document.getElementById('heroBg');
+    setTimeout(() => heroBg.classList.add('loaded'), 100);
+
+    // Scroll reveal
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          e.target.classList.add('visible');
+          observer.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+
+    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+    // Mobile nav toggle
+    document.getElementById('navToggle').addEventListener('click', () => {
+      nav.classList.toggle('nav-mobile-open');
+    });
+
+    // Close mobile nav on link or CTA click
+    document.querySelectorAll('.nav-panel a').forEach(link => {
+      link.addEventListener('click', () => nav.classList.remove('nav-mobile-open'));
+    });
+  </script>
+
+</body>
+</html>
