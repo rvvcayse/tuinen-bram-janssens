@@ -846,11 +846,14 @@
       .nav.nav-mobile-open .nav-panel {
         display: flex;
         flex-direction: column;
-        position: static;
+        position: absolute;
+        top: 72px;
+        inset-inline: 0;
+        bottom: 0;
+        overflow-y: auto;
         align-items: flex-start;
-        padding: 16px 24px 32px;
+        padding: 24px 24px 32px;
         gap: 8px;
-        width: 100%;
       }
       .nav.nav-mobile-open .nav-links {
         flex-direction: column;
