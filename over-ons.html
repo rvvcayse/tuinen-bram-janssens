@@ -603,20 +603,21 @@
       .nav-logo-wrap { height: 56px; width: 140px; }
       .nav.scrolled .nav-logo-wrap { height: 52px; width: 130px; }
       .nav.nav-mobile-open {
+        inset-block-end: 0;
+        overflow-y: auto;
         background: rgba(247,247,244,.98);
         backdrop-filter: blur(12px);
         box-shadow: 0 1px 0 rgba(28,28,26,.08);
       }
+      .nav.nav-mobile-open .nav-toggle span { background: var(--neutral-800); }
       .nav.nav-mobile-open .nav-panel {
         display: flex;
         flex-direction: column;
-        position: fixed;
-        inset: 72px 0 0;
-        background: rgba(247,247,244,.98);
-        backdrop-filter: blur(12px);
+        position: static;
         align-items: flex-start;
-        padding: 32px 24px;
+        padding: 16px 24px 32px;
         gap: 8px;
+        width: 100%;
       }
       .nav.nav-mobile-open .nav-links {
         flex-direction: column;
